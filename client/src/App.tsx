@@ -7,8 +7,8 @@ import {
   Leaves,
   Settings,
   Users,
-} from './pages/DashboardPages';
-import { History, Portal, PortalLayout } from './pages/PortalPages';
+} from './pages/dashboardPages';
+import { History, Portal, PortalLayout } from './pages/portalPages';
 
 const router = createBrowserRouter([
   {
