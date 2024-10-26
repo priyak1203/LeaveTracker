@@ -56,3 +56,24 @@ export const leavesData = [
     updatedBy: 'Susie Bates',
   },
 ];
+
+export const eventsData = [
+  {
+    id: 1,
+    title: "Mark's Birthday",
+    description: 'Birthday of Mark',
+    date: '14-11-2024',
+  },
+  {
+    id: 2,
+    title: 'Staff Outing',
+    description: 'Outing for all the staffs',
+    date: '15-12-2024',
+  },
+  {
+    id: 3,
+    title: 'Suzie On Leave',
+    description: 'Suzie off for 6 days',
+    date: '30-11-2024',
+  },
+];
