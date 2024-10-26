@@ -31,3 +31,28 @@ export const usersData = [
     role: 'user',
   },
 ];
+
+export const leavesData = [
+  {
+    id: 1,
+    name: 'Mark Henry',
+    type: 'study',
+    year: 2024,
+    status: 'approved',
+    req_note: 'i want to be studying',
+    updated: '4 days ago',
+    updated_note: 'this you gonna need it i guess',
+    updatedBy: 'Susie Bates',
+  },
+  {
+    id: 2,
+    name: 'Priya Mehra',
+    type: 'year',
+    year: 2024,
+    status: 'pending',
+    req_note: 'my yearly leaves',
+    updated: '2 days ago',
+    updated_note: 'you can take this',
+    updatedBy: 'Susie Bates',
+  },
+];
