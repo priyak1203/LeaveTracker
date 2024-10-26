@@ -1,5 +1,12 @@
+import BalancesTable from '@/components/dashboard/BalancesTable';
+import Container from '@/components/globals/Container';
+
 function BalancesPage() {
-  return <div>BalancesPage</div>;
+  return (
+    <Container>
+      <BalancesTable />
+    </Container>
+  );
 }
 
 export default BalancesPage;
