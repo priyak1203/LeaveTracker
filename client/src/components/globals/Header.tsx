@@ -10,6 +10,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import BigSidebar from './BigSidebar';
 
 function Header() {
   const user = { name: 'Susan' };
@@ -17,10 +18,10 @@ function Header() {
     <Container>
       <header className="bg-white rounded-md shadow-sm dark:bg-black dark:border-b z-10">
         <nav className="p-4 transition-all">
-          <div className="px-4 flex  justify-between items-center flex-wrap">
+          <div className="mx-4 flex justify-between items-center flex-wrap">
             {/* LEFT SIDE */}
-            <div>
-              <span>Logo</span>
+            <div className="flex justify-start items-center">
+              <BigSidebar />
             </div>
 
             {/* RIGHT SIDE */}
