@@ -10,6 +10,8 @@ import {
 } from './pages/dashboardPages';
 import { History, Portal, PortalLayout } from './pages/portalPages';
 
+import { loader as userLoader } from './components/dashboard/UsersTable';
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -24,7 +26,7 @@ const router = createBrowserRouter([
           { path: 'balances', element: <Balances /> },
           { path: 'leaves', element: <Leaves /> },
           { path: 'settings', element: <Settings /> },
-          { path: 'users', element: <Users /> },
+          { path: 'users', element: <Users />, loader: userLoader },
         ],
       },
       {

@@ -1,3 +1,5 @@
+import axios from 'axios';
+import { useLoaderData } from 'react-router-dom';
 import {
   Table,
   TableBody,
@@ -10,9 +12,20 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { IoPencil } from 'react-icons/io5';
 import { FaPlus } from 'react-icons/fa6';
-import { usersData } from '@/utils/mockData';
+
+import { type UserType } from '@/utils/types';
+
+const url = 'http://localhost:5000/api/v1/users/all-users';
+
+export const loader = async () => {
+  const { data } = await axios.get(url);
+  const usersData: UserType[] = data.users;
+  return usersData;
+};
 
 function UsersTable() {
+  const usersData = useLoaderData() as UserType[];
+
   const tableHeadData = [
     'Avatar',
     'Name',
@@ -37,7 +50,7 @@ function UsersTable() {
       <TableBody className="whitespace-nowrap">
         {usersData.map((user) => {
           return (
-            <TableRow key={user.id}>
+            <TableRow key={user._id}>
               <TableCell className="font-medium">
                 <Avatar>
                   <AvatarImage src={user.image} alt={user.name} />
