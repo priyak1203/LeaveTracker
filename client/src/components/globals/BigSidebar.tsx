@@ -6,14 +6,14 @@ function BigSidebar() {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <button className="p-2 bg-blue-100 rounded-full text-blue-500">
+        <button className="p-2 bg-purple-100 rounded-full text-purple-500">
           <TiThMenu size={24} />
         </button>
       </SheetTrigger>
       <SheetContent side="left" className="w-56 flex flex-col justify-between">
         <div>
           <div className="flex mt-3 mb-3 justify-center ">
-            <span className="w-10 h-10 p-2 flex items-center justify-center bg-blue-800 text-white rounded-full">
+            <span className="w-10 h-10 p-2 flex items-center justify-center bg-purple-700 text-white rounded-full">
               LT
             </span>
           </div>

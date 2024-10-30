@@ -26,7 +26,7 @@ function Header() {
 
             {/* RIGHT SIDE */}
             <div className="flex items-center space-x-3 md:space-x-6">
-              <button className="p-2 rounded-full bg-blue-100 text-blue-500">
+              <button className="p-2 rounded-full bg-purple-100 text-purple-500">
                 <PiBellRingingDuotone size={24} />
               </button>
               <Avatar>

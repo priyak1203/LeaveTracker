@@ -4,8 +4,8 @@ function Sidebar() {
       <div className="flex flex-col justify-between items-center h-full">
         {/* TOP PART */}
         <div>
-          <div className="mt-8">
-            <span className="w-10 h-10 p-2 flex items-center justify-center bg-blue-800 text-white rounded-full">
+          <div className="mt-8 flex justify-center items-center">
+            <span className="w-10 h-10 p-2 flex items-center justify-center bg-purple-700 text-white rounded-full">
               LT
             </span>
           </div>
