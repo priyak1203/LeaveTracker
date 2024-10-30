@@ -38,6 +38,14 @@ function UsersTable() {
     'Add Leave Credits',
   ];
 
+  if (usersData.length === 0) {
+    return (
+      <div className="p-6">
+        <h2 className="text-2xl m-4 text-red-800">No users to display</h2>
+      </div>
+    );
+  }
+
   return (
     <Table>
       <TableHeader className="whitespace-nowrap">
