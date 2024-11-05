@@ -1,5 +1,4 @@
-import { adminLinks, moderatorLinks, userLinks } from '@/utils/links';
-import { RenderIconsLinks } from './NavLinks';
+import { RenderNavLinks } from './NavLinks';
 import LogoutBtn from './LogoutBtn';
 import ToggleTheme from './ToggleTheme';
 
@@ -9,17 +8,7 @@ function Sidebar() {
     role: 'ADMIN',
   };
 
-  const adminLinksRender = () => {
-    return <>{RenderIconsLinks({ links: adminLinks })}</>;
-  };
-
-  const moderatorLinksRender = () => {
-    return <>{RenderIconsLinks({ links: moderatorLinks })}</>;
-  };
-
-  const userLinksRender = () => {
-    return <>{RenderIconsLinks({ links: userLinks })}</>;
-  };
+  const renderStyle = 'ICON';
 
   return (
     <div className="hidden sm:block fixed inset-y-0 left-0 w-[5rem] bg-white rounded-lg overflow-hidden dark:bg-black dark:border-r">
@@ -32,9 +21,7 @@ function Sidebar() {
             </span>
           </div>
           <nav className="flex flex-col px-3 py-4 overflow-y-auto">
-            {user?.role === 'ADMIN' && adminLinksRender()}
-            {user?.role === 'MODERATOR' && moderatorLinksRender()}
-            {user?.role === 'USER' && userLinksRender()}
+            <RenderNavLinks userRole={user?.role} renderStyle={renderStyle} />
           </nav>
         </div>
 
@@ -47,4 +34,5 @@ function Sidebar() {
     </div>
   );
 }
+
 export default Sidebar;

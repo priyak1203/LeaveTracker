@@ -6,12 +6,13 @@ import {
   TooltipTrigger,
 } from '../ui/tooltip';
 import { createElement } from 'react';
+import { adminLinks, moderatorLinks, userLinks } from '@/utils/links';
 
 type LinkPropsType = {
   links: { title: string; url: string; icon: React.ElementType }[];
 };
 
-export const RenderIconsLinks = ({ links }: LinkPropsType) => {
+const RenderIconsLinks = ({ links }: LinkPropsType) => {
   return (
     <>
       {links.map((link, index) => (
@@ -34,7 +35,7 @@ export const RenderIconsLinks = ({ links }: LinkPropsType) => {
   );
 };
 
-export const RenderLinks = ({ links }: LinkPropsType) => {
+const RenderLinks = ({ links }: LinkPropsType) => {
   return (
     <>
       {links.map((link, index) => {
@@ -51,4 +52,40 @@ export const RenderLinks = ({ links }: LinkPropsType) => {
       })}
     </>
   );
+};
+
+type NavLinksPropsType = {
+  userRole?: string;
+  renderStyle: string;
+};
+
+export const RenderNavLinks = ({
+  userRole = 'USER',
+  renderStyle,
+}: NavLinksPropsType) => {
+  // admin links
+  if (userRole === 'ADMIN' && renderStyle === 'ICON') {
+    return <RenderIconsLinks links={adminLinks} />;
+  }
+  if (userRole === 'ADMIN' && renderStyle === 'LINKS') {
+    return <RenderLinks links={adminLinks} />;
+  }
+
+  // moderator links
+  if (userRole === 'MODERATOR' && renderStyle === 'ICON') {
+    return <RenderIconsLinks links={moderatorLinks} />;
+  }
+  if (userRole === 'MODERATOR' && renderStyle === 'LINKS') {
+    return <RenderLinks links={moderatorLinks} />;
+  }
+
+  // user links
+  if (userRole === 'USER' && renderStyle === 'ICON') {
+    return <RenderIconsLinks links={userLinks} />;
+  }
+  if (userRole === 'USER' && renderStyle === 'LINKS') {
+    return <RenderLinks links={userLinks} />;
+  }
+
+  return null;
 };

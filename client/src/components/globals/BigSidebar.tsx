@@ -1,8 +1,8 @@
 import { TiThMenu } from 'react-icons/ti';
 
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { RenderLinks } from './NavLinks';
-import { adminLinks, moderatorLinks, userLinks } from '@/utils/links';
+import { RenderNavLinks } from './NavLinks';
+
 import LogoutBtn from './LogoutBtn';
 import ToggleTheme from './ToggleTheme';
 
@@ -12,17 +12,7 @@ function BigSidebar() {
     role: 'ADMIN',
   };
 
-  const adminLinksRender = () => {
-    return <>{RenderLinks({ links: adminLinks })}</>;
-  };
-
-  const moderatorLinksRender = () => {
-    return <>{RenderLinks({ links: moderatorLinks })}</>;
-  };
-
-  const userLinksRender = () => {
-    return <>{RenderLinks({ links: userLinks })}</>;
-  };
+  const renderStyle = 'LINKS';
 
   return (
     <Sheet>
@@ -39,13 +29,10 @@ function BigSidebar() {
             </span>
           </div>
           <nav className="flex flex-col items-center px-3 py-4 overflow-y-auto">
-            {user?.role === 'ADMIN' && adminLinksRender()}
-
-            {user?.role === 'MODERATOR' && moderatorLinksRender()}
-            {user?.role === 'USER' && userLinksRender()}
+            <RenderNavLinks userRole={user.role} renderStyle={renderStyle} />
           </nav>
         </div>
-        <div className="flex flex-col justify-around items-center gap-y-4">
+        <div className="flex justify-around items-center">
           <ToggleTheme />
           <LogoutBtn />
         </div>
