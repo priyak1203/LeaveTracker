@@ -1,6 +1,7 @@
 import { adminLinks, moderatorLinks, userLinks } from '@/utils/links';
 import { RenderIconsLinks } from './NavLinks';
 import LogoutBtn from './LogoutBtn';
+import ToggleTheme from './ToggleTheme';
 
 function Sidebar() {
   // temp
@@ -39,7 +40,7 @@ function Sidebar() {
 
         {/* BOTTOM PART */}
         <div className="flex flex-col items-center space-y-6 my-8">
-          <button>Th To</button>
+          <ToggleTheme />
           <LogoutBtn />
         </div>
       </div>

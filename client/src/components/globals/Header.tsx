@@ -12,6 +12,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import BigSidebar from './BigSidebar';
 import LogoutBtn from './LogoutBtn';
+import ToggleTheme from './ToggleTheme';
 
 function Header() {
   const user = { name: 'Susan' };
@@ -46,10 +47,10 @@ function Header() {
                   <DropdownMenuItem>Profile</DropdownMenuItem>
                   <DropdownMenuItem>Support</DropdownMenuItem>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem>
+                  <div className="flex flex-col items-start space-y-4 m-2">
                     <LogoutBtn />
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>Toggle Theme</DropdownMenuItem>
+                    <ToggleTheme />
+                  </div>
                 </DropdownMenuContent>
               </DropdownMenu>
             </div>

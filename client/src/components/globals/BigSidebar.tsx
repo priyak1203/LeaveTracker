@@ -4,6 +4,7 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { RenderLinks } from './NavLinks';
 import { adminLinks, moderatorLinks, userLinks } from '@/utils/links';
 import LogoutBtn from './LogoutBtn';
+import ToggleTheme from './ToggleTheme';
 
 function BigSidebar() {
   // temp
@@ -44,8 +45,8 @@ function BigSidebar() {
             {user?.role === 'USER' && userLinksRender()}
           </nav>
         </div>
-        <div className="flex flex-col justify-around items-center">
-          <button>Toggle Theme</button>
+        <div className="flex flex-col justify-around items-center gap-y-4">
+          <ToggleTheme />
           <LogoutBtn />
         </div>
       </SheetContent>
