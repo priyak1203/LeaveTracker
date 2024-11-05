@@ -11,6 +11,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import BigSidebar from './BigSidebar';
+import LogoutBtn from './LogoutBtn';
 
 function Header() {
   const user = { name: 'Susan' };
@@ -45,7 +46,9 @@ function Header() {
                   <DropdownMenuItem>Profile</DropdownMenuItem>
                   <DropdownMenuItem>Support</DropdownMenuItem>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem>Logout</DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <LogoutBtn />
+                  </DropdownMenuItem>
                   <DropdownMenuItem>Toggle Theme</DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>

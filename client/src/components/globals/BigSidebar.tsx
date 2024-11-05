@@ -3,6 +3,7 @@ import { TiThMenu } from 'react-icons/ti';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { RenderLinks } from './NavLinks';
 import { adminLinks, moderatorLinks, userLinks } from '@/utils/links';
+import LogoutBtn from './LogoutBtn';
 
 function BigSidebar() {
   // temp
@@ -45,7 +46,7 @@ function BigSidebar() {
         </div>
         <div className="flex flex-col justify-around items-center">
           <button>Toggle Theme</button>
-          <button className="text-slate-500 dark:text-slate-300">Logout</button>
+          <LogoutBtn />
         </div>
       </SheetContent>
     </Sheet>
