@@ -7,11 +7,11 @@ import {
 } from '../ui/tooltip';
 import { createElement } from 'react';
 
-type Props = {
+type LinkPropsType = {
   links: { title: string; url: string; icon: React.ElementType }[];
 };
 
-export const RenderIconsLinks = ({ links }: Props) => {
+export const RenderIconsLinks = ({ links }: LinkPropsType) => {
   return (
     <>
       {links.map((link, index) => (
@@ -30,6 +30,25 @@ export const RenderIconsLinks = ({ links }: Props) => {
           </TooltipProvider>
         </NavLink>
       ))}
+    </>
+  );
+};
+
+export const RenderLinks = ({ links }: LinkPropsType) => {
+  return (
+    <>
+      {links.map((link, index) => {
+        return (
+          <NavLink to={link.url} key={index} className="my-2">
+            <span className="flex items-center justify-between">
+              <span className="px-3">
+                {createElement(link.icon, { size: 24 })}
+              </span>
+              <span className="w-24">{link.title}</span>
+            </span>
+          </NavLink>
+        );
+      })}
     </>
   );
 };

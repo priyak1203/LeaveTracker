@@ -4,7 +4,7 @@ import { RenderIconsLinks } from './NavLinks';
 function Sidebar() {
   // temp
   const user = {
-    role: 'USER',
+    role: 'ADMIN',
   };
 
   const adminLinksRender = () => {

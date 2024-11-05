@@ -1,8 +1,27 @@
 import { TiThMenu } from 'react-icons/ti';
 
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { RenderLinks } from './NavLinks';
+import { adminLinks, moderatorLinks, userLinks } from '@/utils/links';
 
 function BigSidebar() {
+  // temp
+  const user = {
+    role: 'ADMIN',
+  };
+
+  const adminLinksRender = () => {
+    return <>{RenderLinks({ links: adminLinks })}</>;
+  };
+
+  const moderatorLinksRender = () => {
+    return <>{RenderLinks({ links: moderatorLinks })}</>;
+  };
+
+  const userLinksRender = () => {
+    return <>{RenderLinks({ links: userLinks })}</>;
+  };
+
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -18,9 +37,10 @@ function BigSidebar() {
             </span>
           </div>
           <nav className="flex flex-col items-center px-3 py-4 overflow-y-auto">
-            <p>Icon 1</p>
-            <p>Icon 2</p>
-            <p>Icon 3</p>
+            {user?.role === 'ADMIN' && adminLinksRender()}
+
+            {user?.role === 'MODERATOR' && moderatorLinksRender()}
+            {user?.role === 'USER' && userLinksRender()}
           </nav>
         </div>
         <div className="flex flex-col justify-around items-center">
