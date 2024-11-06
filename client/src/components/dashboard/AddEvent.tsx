@@ -82,14 +82,17 @@ function AddEvent() {
                     <FormControl>
                       <Button
                         variant={'outline'}
-                        className={cn('inline-flex justify-between')}
+                        className={cn(
+                          'inline-flex justify-between',
+                          !field.value && 'text-muted-foreground'
+                        )}
                       >
                         {field.value ? (
                           format(field.value, 'PPP')
                         ) : (
                           <span>Pick a date</span>
                         )}
-                        <IoCalendarOutline className="w-4 h-4 opacity-50" />
+                        <IoCalendarOutline className="w-4 h-4 opacity-90" />
                       </Button>
                     </FormControl>
                   </PopoverTrigger>

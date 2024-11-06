@@ -1,5 +1,11 @@
+import GreetingBanner from '@/components/portal/GreetingBanner';
+
 function PortalPage() {
-  return <div>PortalPage</div>;
+  return (
+    <>
+      <GreetingBanner />
+    </>
+  );
 }
 
 export default PortalPage;
