@@ -14,15 +14,22 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
-import { Button } from '../ui/button';
+import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { PiCaretUpDownBold } from 'react-icons/pi';
+
 import { leaveTypes } from '@/utils/sampleData';
 
 import { IoCalendarOutline } from 'react-icons/io5';
 import { format } from 'date-fns';
-import { Calendar } from '../ui/calendar';
-import { Textarea } from '../ui/textarea';
+import { Calendar } from '@/components/ui/calendar';
+import { Textarea } from '@/components/ui/textarea';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
 function RequestForm() {
   const form = useForm({});
@@ -43,28 +50,24 @@ function RequestForm() {
             render={({ field }) => (
               <FormItem className="flex flex-col">
                 <FormLabel>Leave Type</FormLabel>
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <FormControl>
-                      <Button
-                        variant="outline"
-                        role="combobox"
-                        className={cn(
-                          'justify-between',
-                          !field.value && 'text-muted-foreground'
-                        )}
-                      >
-                        {field.value
-                          ? leaveTypes.find(
-                              (leave) => leave.value === field.value
-                            )?.label
-                          : 'Select a leave'}
-                        <PiCaretUpDownBold className="h-4 w-4 ml-2 shrink-0" />
-                      </Button>
-                    </FormControl>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-[200px] p-0"></PopoverContent>
-                </Popover>
+                <FormControl>
+                  <Select {...field}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select a leave type" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {leaveTypes.map((leave) => (
+                        <SelectItem
+                          key={leave.label}
+                          value={leave.value}
+                          className="flex"
+                        >
+                          {leave.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </FormControl>
               </FormItem>
             )}
           />
@@ -82,7 +85,7 @@ function RequestForm() {
                       <Button
                         variant="outline"
                         className={cn(
-                          'inline-flex justify-between',
+                          'inline-flex justify-between focus:border-purple-700 hover:border-purple-700 ',
                           !field.value && 'text-muted-foreground'
                         )}
                       >
@@ -100,7 +103,6 @@ function RequestForm() {
                       mode="single"
                       onSelect={field.onChange}
                       disabled={(date) => date < new Date()}
-                      initialFocus
                     />
                   </PopoverContent>
                 </Popover>
@@ -121,7 +123,7 @@ function RequestForm() {
                       <Button
                         variant="outline"
                         className={cn(
-                          'inline-flex justify-between',
+                          'inline-flex justify-between focus:border-purple-700 hover:border-purple-700',
                           !field.value && 'text-muted-foreground'
                         )}
                       >
