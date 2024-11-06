@@ -6,4 +6,4 @@ export const leaveTypes = [
   { label: 'Maternity', value: 'MATERNITY' },
   { label: 'Paternity', value: 'PATERNITY' },
   { label: 'Unpaid', value: 'UNPAID' },
-];
+] as const;

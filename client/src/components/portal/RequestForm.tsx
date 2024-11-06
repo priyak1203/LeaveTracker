@@ -18,7 +18,6 @@ import { Button } from '../ui/button';
 import { cn } from '@/lib/utils';
 import { PiCaretUpDownBold } from 'react-icons/pi';
 import { leaveTypes } from '@/utils/sampleData';
-import { Command, CommandEmpty, CommandInput } from '@/components/ui/command';
 
 import { IoCalendarOutline } from 'react-icons/io5';
 import { format } from 'date-fns';
@@ -64,17 +63,7 @@ function RequestForm() {
                       </Button>
                     </FormControl>
                   </PopoverTrigger>
-                  <PopoverContent className="w-[200px] p-0">
-                    <Command>
-                      <CommandInput placeholder="Search a leave..." />
-                      <CommandEmpty>No leave type found.</CommandEmpty>
-                      {/* <CommandGroup>
-                        {leaveTypes.map((leave) => (
-                          <p>{leave.label}</p>
-                        ))}
-                      </CommandGroup> */}
-                    </Command>
-                  </PopoverContent>
+                  <PopoverContent className="w-[200px] p-0"></PopoverContent>
                 </Popover>
               </FormItem>
             )}
