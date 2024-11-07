@@ -7,7 +7,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { type IconType } from 'react-icons/lib';
-import { Button } from '../ui/button';
+import { Button } from '@/components/ui/button';
 
 type DialogPropsType = {
   children: React.ReactNode;
