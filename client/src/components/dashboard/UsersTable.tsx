@@ -11,9 +11,9 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { IoPencil } from 'react-icons/io5';
-import { FaPlus } from 'react-icons/fa6';
 
 import { type UserType } from '@/utils/types';
+import AddCredits from './AddCredits';
 
 const url = 'http://localhost:5000/api/v1/users/all-users';
 
@@ -57,33 +57,45 @@ function UsersTable() {
       </TableHeader>
       <TableBody className="whitespace-nowrap">
         {usersData.map((user) => {
+          const {
+            _id: userId,
+            name,
+            image,
+            email,
+            phone,
+            department,
+            jobTitle,
+            role,
+          } = user;
           return (
-            <TableRow key={user._id}>
+            <TableRow key={userId}>
               <TableCell className="font-medium">
                 <Avatar>
-                  <AvatarImage src={user.image} alt={user.name} />
-                  <AvatarFallback>{user.name?.charAt(0)}</AvatarFallback>
+                  <AvatarImage src={image} alt={name} />
+                  <AvatarFallback>
+                    {name?.charAt(0).toUpperCase()}
+                  </AvatarFallback>
                 </Avatar>
               </TableCell>
-              <TableCell className="font-medium">{user.name}</TableCell>
-              <TableCell>{user.email}</TableCell>
-              <TableCell>{user.phone}</TableCell>
+              <TableCell className="font-medium">{name}</TableCell>
+              <TableCell>{email}</TableCell>
+              <TableCell>{phone}</TableCell>
               <TableCell>
                 <Badge variant={'outline'} className="capitalize">
-                  {user.department}
+                  {department}
                 </Badge>
               </TableCell>
               <TableCell>
                 <Badge variant={'secondary'} className="capitalize">
-                  {user.jobTitle}
+                  {jobTitle}
                 </Badge>
               </TableCell>
-              <TableCell className="uppercase">{user.role}</TableCell>
+              <TableCell className="uppercase">{role}</TableCell>
               <TableCell>
                 <IoPencil className="text-primary w-4 h-4" />
               </TableCell>
               <TableCell>
-                <FaPlus className="text-primary w-4 h-4" />
+                <AddCredits />
               </TableCell>
             </TableRow>
           );

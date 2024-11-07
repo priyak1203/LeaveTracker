@@ -36,7 +36,9 @@ function DialogWrapper({
         {isBtn ? (
           <Button className="text-white">{btnTitle}</Button>
         ) : (
-          Icon && <Icon />
+          Icon && (
+            <Icon className="text-purple-600 cursor-pointer h-4 w-4 ml-2" />
+          )
         )}
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
