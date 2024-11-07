@@ -34,7 +34,7 @@ function PortalCalendar() {
         </div>
       </div>
       {/* DAYS OF THE MONTH */}
-      <section className="bg-white py-2 dark:bg-slate-700">
+      <section className="bg-white py-2 rounded-b-md dark:border dark:bg-slate-700">
         <div className="grid grid-cols-7">
           {daysOfTheWeek.map((day, index) => (
             <h2

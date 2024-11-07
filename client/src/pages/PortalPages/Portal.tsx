@@ -9,7 +9,8 @@ function PortalPage() {
     <>
       <GreetingBanner />
       <PortalCalendar />
-      <h2 className="my-4 text-lg text-center font-semibold leading-tight lg:text-xl">
+
+      <h2 className="mt-10 text-lg text-center font-semibold leading-tight lg:text-xl">
         {!currentYearBalances
           ? 'No Balances Data found...'
           : 'Current Year Balances'}
