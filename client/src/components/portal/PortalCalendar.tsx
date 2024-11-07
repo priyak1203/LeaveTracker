@@ -12,7 +12,7 @@ function PortalCalendar() {
   return (
     <Container>
       {/* HEADER */}
-      <div className="flex flex-col sm:flex-row justify-between items-center bg-purple-100 py-5 px-10 rounded-t-md dark:bg-slate-900">
+      <div className="flex flex-col sm:flex-row justify-between items-center bg-purple-200 py-5 px-10 rounded-t-md dark:bg-slate-800">
         <h2 className="select-none font-semibold">
           {months[today.month()]}, {today.year()}
         </h2>
@@ -34,7 +34,7 @@ function PortalCalendar() {
         </div>
       </div>
       {/* DAYS OF THE MONTH */}
-      <section className="bg-white py-2">
+      <section className="bg-white py-2 dark:bg-slate-700">
         <div className="grid grid-cols-7">
           {daysOfTheWeek.map((day, index) => (
             <h2
@@ -54,7 +54,7 @@ function PortalCalendar() {
                   className={cn(
                     !currentMonth && 'text-slate-400',
                     today && 'bg-purple-600 text-white',
-                    'h-8 w-8 grid place-content-center rounded-lg cursor-pointer hover:bg-purple-800 dark:hover:bg-slate-500'
+                    'h-8 w-8 grid place-content-center rounded-lg cursor-pointer hover:bg-purple-800 hover:text-white dark:hover:bg-slate-500'
                   )}
                 >
                   {date.date()}
