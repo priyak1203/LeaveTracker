@@ -37,7 +37,7 @@ function DialogWrapper({
           <Button className="text-white">{btnTitle}</Button>
         ) : (
           Icon && (
-            <Icon className="text-purple-600 cursor-pointer h-4 w-4 ml-2" />
+            <Icon className="text-purple-600 cursor-pointer h-5 w-5 mx-auto" />
           )
         )}
       </DialogTrigger>

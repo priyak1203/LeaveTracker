@@ -10,10 +10,10 @@ import {
 } from '@/components/ui/table';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
-import { IoPencil } from 'react-icons/io5';
 
 import { type UserType } from '@/utils/types';
 import AddCredits from './AddCredits';
+import EditUser from './EditUser';
 
 const url = 'http://localhost:5000/api/v1/users/all-users';
 
@@ -34,7 +34,7 @@ function UsersTable() {
     'Department',
     'Job Title',
     'Role',
-    'Edit',
+    'Edit User Info',
     'Add Leave Credits',
   ];
 
@@ -72,7 +72,7 @@ function UsersTable() {
               <TableCell className="font-medium">
                 <Avatar>
                   <AvatarImage src={image} alt={name} />
-                  <AvatarFallback>
+                  <AvatarFallback className="bg-purple-300 text-slate-800 dark:bg-purple-800 dark:text-white">
                     {name?.charAt(0).toUpperCase()}
                   </AvatarFallback>
                 </Avatar>
@@ -92,7 +92,7 @@ function UsersTable() {
               </TableCell>
               <TableCell className="uppercase">{role}</TableCell>
               <TableCell>
-                <IoPencil className="text-primary w-4 h-4" />
+                <EditUser />
               </TableCell>
               <TableCell>
                 <AddCredits />

@@ -159,6 +159,76 @@ export const balancesData = [
   },
 ];
 
+// Admin Users Page Mock Data
+
+export const UserRoles = ['ADMIN', 'USER', 'MODERATOR'] as const;
+
+export const orgDepartments = [
+  {
+    label: 'Finance',
+    id: '1ea40bcd-b285-4405-84be-c5591c62dfd2',
+    desc: 'Handles money',
+    users: [],
+  },
+  {
+    label: 'Tech',
+    id: '687d77fe-dfc1-4380-a1c5-3d2e30b1f42f',
+    desc: 'Develop Software',
+    users: [],
+  },
+  {
+    label: 'Human Resources',
+    id: '85c738e2-65ac-4a53-8ad1-2cb6cf43d3b4',
+    desc: 'Deals with human matters',
+    users: [],
+  },
+  {
+    label: 'Operations',
+    id: '843e8109-d4b8-4323-9433-2554e1704e7c',
+    desc: 'Runs operations',
+    users: [],
+  },
+  {
+    label: 'Product',
+    id: '39707d6f-4aba-4f49-8039-68e95b6f5e4e',
+    desc: 'Manages product development',
+    users: [],
+  },
+] as const;
+
+export const orgTitles = [
+  {
+    label: 'CEO',
+    id: 'b8bcdc18-3c95-4a28-b378-df811619580e',
+    desc: 'Handles money',
+    subordinates: [],
+  },
+  {
+    label: 'Senior Developer',
+    id: '68100e6a-5651-4e2e-a188-749eed93cda3',
+    desc: 'Develop Software',
+    subordinates: [],
+  },
+  {
+    label: 'Human Resources Manager',
+    id: 'd65fff39-2a43-4018-a219-f46ca1db8153',
+    desc: 'Deals with human matters',
+    subordinates: [],
+  },
+  {
+    label: 'Operations Manager',
+    id: 'b775b1fe-f9c1-41f7-96b3-44024add621a',
+    desc: 'Runs operations',
+    subordinates: [],
+  },
+  {
+    label: 'Product Owner',
+    id: 'b723765a-da0e-4065-b858-74cb915bdc44',
+    desc: 'Manages product development',
+    subordinates: [],
+  },
+] as const;
+
 // Portal Page Mock Data
 export const userLeaveBalances = [
   {
