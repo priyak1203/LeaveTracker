@@ -10,6 +10,7 @@ const validateWithZodSchema = (schema, data) => {
   return result.data;
 };
 
+// Register User Validation
 const registerUserSchema = z.object({
   name: z.string({ message: 'name is required' }),
   email: z
@@ -24,4 +25,16 @@ const registerUserSchema = z.object({
 
 export const validateRegisterUserInput = (data) => {
   return validateWithZodSchema(registerUserSchema, data);
+};
+
+// Login user validation
+const loginUserSchema = z.object({
+  email: z
+    .string({ message: 'email is required' })
+    .email({ message: 'Please enter valid email' }),
+  password: z.string({ message: 'password is required' }),
+});
+
+export const validateLoginUserInput = (data) => {
+  return validateWithZodSchema(loginUserSchema, data);
 };
