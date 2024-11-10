@@ -6,12 +6,43 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+
+const RegisterSchema = z.object({
+  name: z.string().min(1, { message: 'Please enter your name' }),
+  email: z.string().email({ message: 'Please enter valid email' }),
+  password: z
+    .string()
+    .min(6, { message: 'Password must be atleast 6 characters' }),
+  lastName: z.string({ message: 'last must be a string' }).optional(),
+  phone: z.string({ message: 'Phone number must be a string' }).optional(),
+});
 
 function Register() {
-  const form = useForm();
+  const form = useForm<z.infer<typeof RegisterSchema>>({
+    resolver: zodResolver(RegisterSchema),
+    defaultValues: {
+      name: '',
+      lastName: '',
+      email: '',
+      password: '',
+      phone: '',
+    },
+  });
+
+  function onSubmit(values: z.infer<typeof RegisterSchema>) {
+    console.log('submit function');
+    try {
+      console.log(values);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <div className="bg-slate-200 min-h-screen p-10 dark:bg-slate-800">
@@ -23,7 +54,10 @@ function Register() {
         </CardHeader>
         <CardContent>
           <Form {...form}>
-            <form className="space-y-2 border-slate-600">
+            <form
+              className="space-y-2 border-slate-600"
+              onSubmit={form.handleSubmit(onSubmit)}
+            >
               <FormField
                 control={form.control}
                 name="name"
@@ -34,10 +68,10 @@ function Register() {
                       <Input
                         type="text"
                         {...field}
-                        required
                         className="border-slate-300"
                       />
                     </FormControl>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -54,6 +88,7 @@ function Register() {
                         className="border-slate-300"
                       />
                     </FormControl>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -67,10 +102,10 @@ function Register() {
                       <Input
                         type="email"
                         {...field}
-                        required
                         className="border-slate-300"
                       />
                     </FormControl>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -84,10 +119,10 @@ function Register() {
                       <Input
                         type="password"
                         {...field}
-                        required
                         className="border-slate-300"
                       />
                     </FormControl>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -104,6 +139,7 @@ function Register() {
                         className="border-slate-300"
                       />
                     </FormControl>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
