@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { HomeLayout, LoginPage } from './pages';
+import { HomeLayout, Landing, Login, Register } from './pages';
 import {
   Balances,
   Dashboard,
@@ -17,9 +17,11 @@ const router = createBrowserRouter([
     path: '/',
     element: <HomeLayout />,
     children: [
-      { index: true, element: <LoginPage /> },
+      { index: true, element: <Landing /> },
+      { path: '/register', element: <Register /> },
+      { path: '/login', element: <Login /> },
       {
-        path: '/dashboard',
+        path: 'dashboard',
         element: <DashboardLayout />,
         children: [
           { index: true, element: <Dashboard /> },
@@ -30,7 +32,7 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: '/portal',
+        path: 'portal',
         element: <PortalLayout />,
         children: [
           { index: true, element: <Portal /> },
