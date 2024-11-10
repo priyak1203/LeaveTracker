@@ -6,18 +6,44 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import FormCardWrapper from '@/components/globals/FormCardWrapper';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+
+const LoginSchema = z.object({
+  email: z.string().email({ message: 'Please enter your email' }),
+  password: z.string().min(1, { message: 'Please enter your password' }),
+});
 
 function Login() {
-  const form = useForm();
+  const form = useForm<z.infer<typeof LoginSchema>>({
+    resolver: zodResolver(LoginSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  });
+
+  function onSubmit(values: z.infer<typeof LoginSchema>) {
+    console.log('login submit');
+    try {
+      console.log(values);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <>
       <FormCardWrapper title="Login">
         <Form {...form}>
-          <form className="space-y-2 border-slate-600">
+          <form
+            className="space-y-2 border-slate-600"
+            onSubmit={form.handleSubmit(onSubmit)}
+          >
             <FormField
               control={form.control}
               name="email"
@@ -28,10 +54,10 @@ function Login() {
                     <Input
                       type="email"
                       {...field}
-                      required
                       className="border-slate-300"
                     />
                   </FormControl>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -45,10 +71,10 @@ function Login() {
                     <Input
                       type="password"
                       {...field}
-                      required
                       className="border-slate-300"
                     />
                   </FormControl>
+                  <FormMessage />
                 </FormItem>
               )}
             />
