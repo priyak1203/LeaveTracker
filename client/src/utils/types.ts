@@ -3,9 +3,9 @@ export type UserType = {
   name: string;
   lastName?: string;
   email: string;
-  phone: string;
-  department: string;
-  jobTitle: string;
+  phone?: string;
+  department?: string;
+  jobTitle?: string;
   role: string;
   image?: string;
 };
