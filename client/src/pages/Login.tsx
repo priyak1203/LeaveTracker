@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-hot-toast';
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -12,6 +13,8 @@ import { Input } from '@/components/ui/input';
 import FormCardWrapper from '@/components/globals/FormCardWrapper';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const LoginSchema = z.object({
   email: z.string().email({ message: 'Please enter your email' }),
@@ -27,12 +30,25 @@ function Login() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof LoginSchema>) {
+  const isSubmitting = form.formState.isSubmitting;
+  const navigate = useNavigate();
+
+  async function onSubmit(values: z.infer<typeof LoginSchema>) {
     console.log('login submit');
     try {
       console.log(values);
-    } catch (error) {
+      const data = await axios.post(
+        'http://localhost:5000/api/v1/auth/login',
+        values
+      );
+      console.log(data);
+      toast.success('Login Successful');
+      setTimeout(() => {
+        navigate('/portal');
+      }, 1000);
+    } catch (error: any) {
       console.log(error);
+      toast.error(error?.response?.data?.msg);
     }
   }
 
@@ -80,8 +96,13 @@ function Login() {
             />
 
             <div className="flex pt-6">
-              <Button type="submit" className="mx-auto" size="lg">
-                Submit
+              <Button
+                type="submit"
+                className="mx-auto"
+                size="lg"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? 'Submitting...' : ' Submit'}
               </Button>
             </div>
           </form>

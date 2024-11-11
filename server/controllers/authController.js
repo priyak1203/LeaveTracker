@@ -44,7 +44,6 @@ export const login = async (req, res) => {
 
   // check if the user exists
   const user = await User.findOne({ email });
-  console.log(user);
 
   // check if the password is correct
   const isValidUser = user && (await comparePassword(password, user.password));

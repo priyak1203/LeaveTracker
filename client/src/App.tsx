@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
 import { HomeLayout, Landing, Login, Register } from './pages';
 import {
   Balances,
@@ -46,6 +47,13 @@ const router = createBrowserRouter([
 function App() {
   return (
     <>
+      <Toaster
+        toastOptions={{
+          style: {
+            textTransform: 'capitalize',
+          },
+        }}
+      />
       <RouterProvider router={router} />
     </>
   );
