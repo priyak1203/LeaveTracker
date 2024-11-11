@@ -15,7 +15,7 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { ContextType, useAppContext } from '@/context/appContext';
+import { AppContextType, useAppContext } from '@/context/appContext';
 
 const LoginSchema = z.object({
   email: z.string().email({ message: 'Please enter your email' }),
@@ -34,7 +34,7 @@ function Login() {
   const isSubmitting = form.formState.isSubmitting;
   const navigate = useNavigate();
 
-  const { setUser } = useAppContext() as ContextType;
+  const { setUser } = useAppContext() as AppContextType;
 
   async function onSubmit(values: z.infer<typeof LoginSchema>) {
     try {

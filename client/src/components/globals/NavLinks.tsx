@@ -60,30 +60,30 @@ type NavLinksPropsType = {
 };
 
 export const RenderNavLinks = ({
-  userRole = 'USER',
+  userRole = '',
   renderStyle,
 }: NavLinksPropsType) => {
   // admin links
-  if (userRole === 'ADMIN' && renderStyle === 'ICON') {
+  if (userRole === 'admin' && renderStyle === 'ICON') {
     return <RenderIconsLinks links={adminLinks} />;
   }
-  if (userRole === 'ADMIN' && renderStyle === 'LINKS') {
+  if (userRole === 'admin' && renderStyle === 'LINKS') {
     return <RenderLinks links={adminLinks} />;
   }
 
   // moderator links
-  if (userRole === 'MODERATOR' && renderStyle === 'ICON') {
+  if (userRole === 'moderator' && renderStyle === 'ICON') {
     return <RenderIconsLinks links={moderatorLinks} />;
   }
-  if (userRole === 'MODERATOR' && renderStyle === 'LINKS') {
+  if (userRole === 'moderator' && renderStyle === 'LINKS') {
     return <RenderLinks links={moderatorLinks} />;
   }
 
   // user links
-  if (userRole === 'USER' && renderStyle === 'ICON') {
+  if (userRole === 'user' && renderStyle === 'ICON') {
     return <RenderIconsLinks links={userLinks} />;
   }
-  if (userRole === 'USER' && renderStyle === 'LINKS') {
+  if (userRole === 'user' && renderStyle === 'LINKS') {
     return <RenderLinks links={userLinks} />;
   }
 

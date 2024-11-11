@@ -1,8 +1,8 @@
-import { ContextType, useAppContext } from '@/context/appContext';
+import { AppContextType, useAppContext } from '@/context/appContext';
 import { Navigate } from 'react-router-dom';
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
-  const { user } = useAppContext() as ContextType;
+  const { user } = useAppContext() as AppContextType;
   if (user) {
     return <>{children}</>;
   }

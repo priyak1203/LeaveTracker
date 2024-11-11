@@ -12,13 +12,10 @@ import { RenderNavLinks } from './NavLinks';
 import LogoutBtn from './LogoutBtn';
 import ToggleTheme from './ToggleTheme';
 import { Link } from 'react-router-dom';
+import { AppContextType, useAppContext } from '@/context/appContext';
 
 function BigSidebar() {
-  // temp
-  const user = {
-    role: 'ADMIN',
-  };
-
+  const { user } = useAppContext() as AppContextType;
   const renderStyle = 'LINKS';
 
   return (
@@ -39,7 +36,7 @@ function BigSidebar() {
           </SheetTitle>
           <SheetDescription></SheetDescription>
           <nav className="flex flex-col items-center px-3 py-4 overflow-y-auto">
-            <RenderNavLinks userRole={user.role} renderStyle={renderStyle} />
+            <RenderNavLinks userRole={user?.role} renderStyle={renderStyle} />
           </nav>
         </div>
         <div className="flex justify-around items-center">

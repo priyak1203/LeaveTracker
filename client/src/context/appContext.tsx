@@ -3,7 +3,7 @@ import { createContext, useContext, useReducer } from 'react';
 import reducer from './reducer';
 import { SET_USER } from './actions';
 
-export type ContextType = {
+export type AppContextType = {
   user: UserType | null;
   setUser: (user: UserType) => void;
 };
@@ -16,7 +16,7 @@ const initialState: StateType = {
   user: null,
 };
 
-const AppContext = createContext<ContextType | null>(null);
+const AppContext = createContext<AppContextType | null>(null);
 
 const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);

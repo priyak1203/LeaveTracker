@@ -2,13 +2,10 @@ import { RenderNavLinks } from './NavLinks';
 import LogoutBtn from './LogoutBtn';
 import ToggleTheme from './ToggleTheme';
 import { Link } from 'react-router-dom';
+import { AppContextType, useAppContext } from '@/context/appContext';
 
 function Sidebar() {
-  // temp
-  const user = {
-    role: 'ADMIN',
-  };
-
+  const { user } = useAppContext() as AppContextType;
   const renderStyle = 'ICON';
 
   return (
