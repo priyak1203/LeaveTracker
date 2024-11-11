@@ -53,7 +53,10 @@ export const login = async (req, res) => {
   // setting up token
   const token = createJWT({ userId: user._id, role: user.role });
 
+  // filter user data to send
+  const userInfo = user.toJSON();
+
   res
     .status(StatusCodes.OK)
-    .json({ msg: 'user logged in', user: { name: user.name }, token });
+    .json({ msg: 'user logged in', user: userInfo, token });
 };

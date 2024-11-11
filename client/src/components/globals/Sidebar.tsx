@@ -1,6 +1,7 @@
 import { RenderNavLinks } from './NavLinks';
 import LogoutBtn from './LogoutBtn';
 import ToggleTheme from './ToggleTheme';
+import { Link } from 'react-router-dom';
 
 function Sidebar() {
   // temp
@@ -15,11 +16,11 @@ function Sidebar() {
       <div className="flex flex-col justify-between items-center h-full">
         {/* TOP PART */}
         <div>
-          <div className="mt-8 flex justify-center items-center">
+          <Link to="/" className="mt-8 flex justify-center items-center">
             <span className="w-10 h-10 p-2 flex items-center justify-center bg-purple-700 text-white rounded-full">
               LT
             </span>
-          </div>
+          </Link>
           <nav className="flex flex-col px-3 py-4 overflow-y-auto">
             <RenderNavLinks userRole={user?.role} renderStyle={renderStyle} />
           </nav>

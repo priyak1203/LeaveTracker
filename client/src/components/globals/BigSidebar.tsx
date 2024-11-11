@@ -5,6 +5,7 @@ import { RenderNavLinks } from './NavLinks';
 
 import LogoutBtn from './LogoutBtn';
 import ToggleTheme from './ToggleTheme';
+import { Link } from 'react-router-dom';
 
 function BigSidebar() {
   // temp
@@ -23,11 +24,11 @@ function BigSidebar() {
       </SheetTrigger>
       <SheetContent side="left" className="w-56 flex flex-col justify-between">
         <div>
-          <div className="flex mt-3 mb-3 justify-center ">
+          <Link to="/" className="flex mt-3 mb-3 justify-center ">
             <span className="w-10 h-10 p-2 flex items-center justify-center bg-purple-700 text-white rounded-full">
               LT
             </span>
-          </div>
+          </Link>
           <nav className="flex flex-col items-center px-3 py-4 overflow-y-auto">
             <RenderNavLinks userRole={user.role} renderStyle={renderStyle} />
           </nav>
