@@ -1,6 +1,12 @@
 import { TiThMenu } from 'react-icons/ti';
 
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
 import { RenderNavLinks } from './NavLinks';
 
 import LogoutBtn from './LogoutBtn';
@@ -24,11 +30,14 @@ function BigSidebar() {
       </SheetTrigger>
       <SheetContent side="left" className="w-56 flex flex-col justify-between">
         <div>
-          <Link to="/" className="flex mt-3 mb-3 justify-center ">
-            <span className="w-10 h-10 p-2 flex items-center justify-center bg-purple-700 text-white rounded-full">
-              LT
-            </span>
-          </Link>
+          <SheetTitle>
+            <Link to="/" className="flex mt-3 mb-3 justify-center ">
+              <span className="w-10 h-10 p-2 flex items-center justify-center bg-purple-700 text-white rounded-full">
+                LT
+              </span>
+            </Link>
+          </SheetTitle>
+          <SheetDescription></SheetDescription>
           <nav className="flex flex-col items-center px-3 py-4 overflow-y-auto">
             <RenderNavLinks userRole={user.role} renderStyle={renderStyle} />
           </nav>
