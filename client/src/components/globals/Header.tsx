@@ -13,9 +13,11 @@ import {
 import BigSidebar from './BigSidebar';
 import LogoutBtn from './LogoutBtn';
 import ToggleTheme from './ToggleTheme';
+import { AppContextType, useAppContext } from '@/context/appContext';
 
 function Header() {
-  const user = { name: 'Susan' };
+  const { user } = useAppContext() as AppContextType;
+
   return (
     <Container>
       <header className="bg-white rounded-md shadow-sm dark:bg-black dark:border-b z-10">
@@ -33,7 +35,7 @@ function Header() {
               </button>
               <Avatar>
                 <AvatarImage />
-                <AvatarFallback>LT</AvatarFallback>
+                <AvatarFallback>{user?.name.charAt(0) || 'UR'}</AvatarFallback>
               </Avatar>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
