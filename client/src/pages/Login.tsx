@@ -49,7 +49,9 @@ function Login() {
       }, 1000);
     } catch (error: any) {
       console.log(error);
-      toast.error(error?.response?.data?.msg);
+      const msg =
+        error?.response?.data?.msg || `something went wrong, try again`;
+      toast.error(msg);
     }
   }
 

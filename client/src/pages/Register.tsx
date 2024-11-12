@@ -12,6 +12,9 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import FormCardWrapper from '@/components/globals/FormCardWrapper';
+import axios from 'axios';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const RegisterSchema = z.object({
   name: z.string().min(1, { message: 'Please enter your name' }),
@@ -35,12 +38,23 @@ function Register() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof RegisterSchema>) {
-    console.log('submit function');
+  const isSubmitting = form.formState.isSubmitting;
+  const navigate = useNavigate();
+
+  async function onSubmit(values: z.infer<typeof RegisterSchema>) {
     try {
-      console.log(values);
-    } catch (error) {
+      const { data } = await axios.post(
+        `http://localhost:5000/api/v1/auth/register`,
+        values
+      );
+
+      toast.success(data.msg);
+      navigate('/login');
+    } catch (error: any) {
       console.log(error);
+      const msg =
+        error?.response?.data?.msg || `something went wrong, try again`;
+      toast.error(msg);
     }
   }
 
@@ -138,8 +152,13 @@ function Register() {
               )}
             />
             <div className="flex pt-6">
-              <Button type="submit" className="mx-auto" size="lg">
-                Submit
+              <Button
+                type="submit"
+                className="mx-auto"
+                size="lg"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? 'Submitting...' : ' Submit'}
               </Button>
             </div>
           </form>
