@@ -44,7 +44,6 @@ function Register() {
   async function onSubmit(values: z.infer<typeof RegisterSchema>) {
     try {
       const { data } = await customFetch.post(`/auth/register`, values);
-
       toast.success(data.msg);
       navigate('/login');
     } catch (error: any) {

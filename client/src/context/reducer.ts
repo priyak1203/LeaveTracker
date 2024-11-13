@@ -2,7 +2,7 @@ import { UserType } from '@/utils/types';
 import { StateType } from './appContext';
 import { SET_USER } from './actions';
 
-type ActionType = { type: string; payload: UserType };
+type ActionType = { type: 'SET_USER'; payload: UserType };
 
 const reducer = (state: StateType, action: ActionType) => {
   switch (action.type) {
