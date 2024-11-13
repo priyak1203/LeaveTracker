@@ -13,9 +13,9 @@ import { Input } from '@/components/ui/input';
 import FormCardWrapper from '@/components/globals/FormCardWrapper';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { AppContextType, useAppContext } from '@/context/appContext';
+import customFetch from '@/utils/axios';
 
 const LoginSchema = z.object({
   email: z.string().email({ message: 'Please enter your email' }),
@@ -38,10 +38,7 @@ function Login() {
 
   async function onSubmit(values: z.infer<typeof LoginSchema>) {
     try {
-      const { data } = await axios.post(
-        'http://localhost:5000/api/v1/auth/login',
-        values
-      );
+      const { data } = await customFetch.post('/auth/login', values);
       setUser(data.user);
       toast.success('Login Successful');
       setTimeout(() => {

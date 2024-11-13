@@ -12,9 +12,9 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import FormCardWrapper from '@/components/globals/FormCardWrapper';
-import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import customFetch from '@/utils/axios';
 
 const RegisterSchema = z.object({
   name: z.string().min(1, { message: 'Please enter your name' }),
@@ -43,10 +43,7 @@ function Register() {
 
   async function onSubmit(values: z.infer<typeof RegisterSchema>) {
     try {
-      const { data } = await axios.post(
-        `http://localhost:5000/api/v1/auth/register`,
-        values
-      );
+      const { data } = await customFetch.post(`/auth/register`, values);
 
       toast.success(data.msg);
       navigate('/login');
