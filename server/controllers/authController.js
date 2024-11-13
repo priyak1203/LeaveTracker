@@ -58,5 +58,5 @@ export const login = async (req, res) => {
 
   res
     .status(StatusCodes.OK)
-    .json({ msg: 'user logged in', user: userInfo, token });
+    .json({ msg: 'user logged in', user: { ...userInfo, token } });
 };
