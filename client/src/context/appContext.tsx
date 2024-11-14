@@ -1,15 +1,17 @@
 import { createContext, useContext, useReducer } from 'react';
 import { UserType } from '@/utils/types';
 import reducer from './reducer';
-import { SET_USER } from './actions';
+import { CLEAR_USER, SET_USER } from './actions';
 import {
   addUserToLocalStorage,
   getUserFromLocalStorage,
+  removeUserFromLocalStorage,
 } from '@/utils/localStorage';
 
 export type AppContextType = {
   user: UserType | null;
   setUser: (user: UserType) => void;
+  logout: () => void;
 };
 
 export type StateType = {
@@ -31,8 +33,13 @@ const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     addUserToLocalStorage(user);
   };
 
+  const logout = () => {
+    dispatch({ type: CLEAR_USER });
+    removeUserFromLocalStorage();
+  };
+
   return (
-    <AppContext.Provider value={{ user, setUser }}>
+    <AppContext.Provider value={{ user, setUser, logout }}>
       {children}
     </AppContext.Provider>
   );

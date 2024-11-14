@@ -50,8 +50,8 @@ function Header() {
                   <DropdownMenuItem>Support</DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <div className="flex flex-col items-start space-y-4 m-2">
-                    <LogoutBtn />
                     <ToggleTheme />
+                    <LogoutBtn />
                   </div>
                 </DropdownMenuContent>
               </DropdownMenu>
