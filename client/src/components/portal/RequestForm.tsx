@@ -16,9 +16,7 @@ import {
 } from '@/components/ui/popover';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-
 import { leaveTypes } from '@/utils/sampleData';
-
 import { IoCalendarOutline } from 'react-icons/io5';
 import { format } from 'date-fns';
 import { Calendar } from '@/components/ui/calendar';
@@ -30,9 +28,30 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useState } from 'react';
+
+const LeaveSchema = z.object({
+  leaveType: z.string({ required_error: 'Please select a leave type' }),
+  startDate: z.date({ required_error: 'A start date is required' }),
+  endDate: z.date({ required_error: 'An end date is required' }),
+  notes: z.string().max(500).optional(),
+});
 
 function RequestForm() {
-  const form = useForm({});
+  const [open, setOpen] = useState(false);
+
+  const form = useForm<z.infer<typeof LeaveSchema>>({
+    resolver: zodResolver(LeaveSchema),
+    defaultValues: {
+      notes: '',
+    },
+  });
+
+  function onSubmit(values: z.infer<typeof LeaveSchema>) {
+    console.log(values);
+  }
 
   return (
     <DialogWrapper
@@ -40,34 +59,37 @@ function RequestForm() {
       btnTitle="Apply For Leave"
       title="Submit Your Leave Application"
       description="Make sure you select the right dates for leave."
+      open={open}
+      setOpen={() => setOpen(!open)}
     >
       <Form {...form}>
-        <form className="space-y-4">
+        <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
           {/* LEAVE TYPE */}
           <FormField
             control={form.control}
-            name="leave"
+            name="leaveType"
             render={({ field }) => (
               <FormItem className="flex flex-col">
                 <FormLabel>Leave Type</FormLabel>
-                <FormControl>
-                  <Select {...field}>
+                <Select onValueChange={field.onChange} value={field.value}>
+                  <FormControl>
                     <SelectTrigger>
                       <SelectValue placeholder="Select a leave type" />
                     </SelectTrigger>
-                    <SelectContent>
-                      {leaveTypes.map((leave) => (
-                        <SelectItem
-                          key={leave.label}
-                          value={leave.value}
-                          className="flex"
-                        >
-                          {leave.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </FormControl>
+                  </FormControl>
+                  <SelectContent>
+                    {leaveTypes.map((leave) => (
+                      <SelectItem
+                        key={leave.label}
+                        value={leave.value}
+                        className="flex"
+                      >
+                        {leave.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -102,10 +124,18 @@ function RequestForm() {
                     <Calendar
                       mode="single"
                       onSelect={field.onChange}
-                      disabled={(date) => date < new Date()}
+                      selected={field.value}
+                      disabled={(date: Date) => {
+                        const today = new Date();
+                        const currentYear = today.getFullYear();
+                        // this disables the older dates than today and next year dates
+                        return date < today || date.getFullYear() > currentYear;
+                      }}
+                      initialFocus
                     />
                   </PopoverContent>
                 </Popover>
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -140,11 +170,18 @@ function RequestForm() {
                     <Calendar
                       mode="single"
                       onSelect={field.onChange}
-                      disabled={(date) => date < new Date()}
+                      selected={field.value}
+                      disabled={(date: Date) => {
+                        const today = new Date();
+                        const currentYear = today.getFullYear();
+                        // this disables the older dates than today and next year dates
+                        return date < today || date.getFullYear() > currentYear;
+                      }}
                       initialFocus
                     />
                   </PopoverContent>
                 </Popover>
+                <FormMessage />
               </FormItem>
             )}
           />

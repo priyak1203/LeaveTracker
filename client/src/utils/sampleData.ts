@@ -1,9 +1,9 @@
 export const leaveTypes = [
-  { label: 'Annual', value: 'ANNUAL' },
-  { label: 'Health', value: 'HEALTH' },
-  { label: 'Study', value: 'STUDY' },
-  { label: 'Family', value: 'FAMILY' },
-  { label: 'Maternity', value: 'MATERNITY' },
-  { label: 'Paternity', value: 'PATERNITY' },
-  { label: 'Unpaid', value: 'UNPAID' },
+  { label: 'Annual', value: 'annual' },
+  { label: 'Health', value: 'health' },
+  { label: 'Study', value: 'study' },
+  { label: 'Family', value: 'family' },
+  { label: 'Maternity', value: 'maternity' },
+  { label: 'Paternity', value: 'paternity' },
+  { label: 'Unpaid', value: 'unpaid' },
 ] as const;

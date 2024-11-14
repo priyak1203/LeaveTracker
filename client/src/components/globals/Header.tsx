@@ -35,7 +35,9 @@ function Header() {
               </button>
               <Avatar>
                 <AvatarImage />
-                <AvatarFallback>{user?.name.charAt(0) || 'UR'}</AvatarFallback>
+                <AvatarFallback>
+                  {user?.name.charAt(0).toUpperCase() || 'UR'}
+                </AvatarFallback>
               </Avatar>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -44,7 +46,9 @@ function Header() {
                   </button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-56 my-4" align="end">
-                  <DropdownMenuLabel>{user?.name}</DropdownMenuLabel>
+                  <DropdownMenuLabel className="capitalize">
+                    {user?.name}
+                  </DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>Profile</DropdownMenuItem>
                   <DropdownMenuItem>Support</DropdownMenuItem>
