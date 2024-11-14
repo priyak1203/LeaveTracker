@@ -51,6 +51,7 @@ function RequestForm() {
 
   function onSubmit(values: z.infer<typeof LeaveSchema>) {
     console.log(values);
+    console.log(values.startDate.toISOString());
   }
 
   return (
