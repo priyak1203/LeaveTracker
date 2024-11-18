@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { useLoaderData } from 'react-router-dom';
 import {
   Table,
@@ -14,11 +13,10 @@ import { Badge } from '@/components/ui/badge';
 import { type UserType } from '@/utils/types';
 import AddCredits from './AddCredits';
 import EditUser from './EditUser';
-
-const url = 'http://localhost:5000/api/v1/users/all-users';
+import customFetch from '@/utils/axios';
 
 export const loader = async () => {
-  const { data } = await axios.get(url);
+  const { data } = await customFetch.get(`/users/all-users`);
   const usersData: UserType[] = data.users;
   return usersData;
 };
