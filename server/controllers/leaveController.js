@@ -2,6 +2,7 @@ import { BadRequestError } from '../errors/customErrors.js';
 import { validateUserLeaveInput } from '../middlewares/validation.js';
 import { differenceInDays } from 'date-fns';
 import Leave from '../models/leaveModel.js';
+import { StatusCodes } from 'http-status-codes';
 
 export const applyforLeave = async (req, res) => {
   // validating input
@@ -39,5 +40,5 @@ export const applyforLeave = async (req, res) => {
 
   const leave = await Leave.create(leaveData);
 
-  res.status(201).json({ msg: 'Leave Applied Successfully' });
+  res.status(StatusCodes.CREATED).json({ msg: 'Leave Applied Successfully' });
 };
