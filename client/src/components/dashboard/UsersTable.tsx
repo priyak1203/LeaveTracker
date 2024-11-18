@@ -9,7 +9,6 @@ import {
 } from '@/components/ui/table';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
-
 import { type UserType } from '@/utils/types';
 import AddCredits from './AddCredits';
 import EditUser from './EditUser';
@@ -79,18 +78,22 @@ function UsersTable() {
               <TableCell>{email}</TableCell>
               <TableCell>{phone}</TableCell>
               <TableCell>
-                <Badge variant={'outline'} className="capitalize">
-                  {department}
-                </Badge>
+                {department && (
+                  <Badge variant={'outline'} className="capitalize">
+                    {department}
+                  </Badge>
+                )}
               </TableCell>
               <TableCell>
-                <Badge variant={'secondary'} className="capitalize">
-                  {jobTitle}
-                </Badge>
+                {jobTitle && (
+                  <Badge variant={'secondary'} className="capitalize">
+                    {jobTitle}
+                  </Badge>
+                )}
               </TableCell>
               <TableCell className="uppercase">{role}</TableCell>
               <TableCell>
-                <EditUser />
+                <EditUser user={user} />
               </TableCell>
               <TableCell>
                 <AddCredits />

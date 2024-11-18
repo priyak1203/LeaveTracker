@@ -6,6 +6,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from '@/components/ui/form';
 import { useForm } from 'react-hook-form';
 import { Input } from '@/components/ui/input';
@@ -17,14 +18,50 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
-import { orgDepartments, orgTitles, UserRoles } from '@/utils/mockData';
+import { useState } from 'react';
+import { z } from 'zod';
+import { departments, titles, userRoles } from '@/utils/sampleData';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { roleType, type UserType } from '@/utils/types';
 
-function EditUser() {
-  const form = useForm();
+type EditUserPropsType = {
+  user: UserType;
+};
+
+const EditUserSchema = z.object({
+  phone: z.string().max(10).optional(),
+  department: z.string({ required_error: 'Provide department' }),
+  jobTitle: z.string({ required_error: 'Provide job title' }),
+  role: z.enum(userRoles),
+});
+
+function EditUser({ user }: EditUserPropsType) {
+  const [open, setOpen] = useState(false);
+
+  const form = useForm<z.infer<typeof EditUserSchema>>({
+    resolver: zodResolver(EditUserSchema),
+    defaultValues: {
+      phone: user.phone,
+      department: user.department,
+      jobTitle: user.jobTitle,
+      role: user.role as roleType,
+    },
+  });
+
+  function onSubmit(values: z.infer<typeof EditUserSchema>) {
+    console.log(values);
+  }
+
   return (
-    <DialogWrapper isBtn={false} title="Edit User" icon={IoPencil}>
+    <DialogWrapper
+      isBtn={false}
+      title="Edit User"
+      icon={IoPencil}
+      open={open}
+      setOpen={() => setOpen(!open)}
+    >
       <Form {...form}>
-        <form className="space-y-3">
+        <form className="space-y-3" onSubmit={form.handleSubmit(onSubmit)}>
           {/* PHONE  */}
           <FormField
             control={form.control}
@@ -35,6 +72,7 @@ function EditUser() {
                 <FormControl>
                   <Input placeholder="Phone" {...field} />
                 </FormControl>
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -45,23 +83,25 @@ function EditUser() {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Department</FormLabel>
-                <FormControl>
-                  <Select {...field}>
+                <Select onValueChange={field.onChange} value={field.value}>
+                  <FormControl className="capitalize">
                     <SelectTrigger>
                       <SelectValue placeholder="Select a department" />
                     </SelectTrigger>
-                    <SelectContent>
-                      {orgDepartments.map((department) => (
-                        <SelectItem
-                          key={department.id}
-                          value={department.label}
-                        >
-                          {department.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </FormControl>
+                  </FormControl>
+                  <SelectContent>
+                    {departments.map((department) => (
+                      <SelectItem
+                        key={department.id}
+                        value={department.label}
+                        className="capitalize"
+                      >
+                        {department.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -73,20 +113,25 @@ function EditUser() {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Job Title</FormLabel>
-                <FormControl>
-                  <Select {...field}>
+                <Select onValueChange={field.onChange} value={field.value}>
+                  <FormControl className="uppercase">
                     <SelectTrigger>
-                      <SelectValue placeholder="Select a job title" />
+                      <SelectValue placeholder="Select a Job Title" />
                     </SelectTrigger>
-                    <SelectContent>
-                      {orgTitles.map((title) => (
-                        <SelectItem key={title.id} value={title.label}>
-                          {title.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </FormControl>
+                  </FormControl>
+                  <SelectContent>
+                    {titles.map((title) => (
+                      <SelectItem
+                        key={title.id}
+                        value={title.label}
+                        className="uppercase"
+                      >
+                        {title.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -98,24 +143,28 @@ function EditUser() {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Role</FormLabel>
-                <FormControl>
-                  <Select {...field}>
+                <Select onValueChange={field.onChange} value={field.value}>
+                  <FormControl className="uppercase">
                     <SelectTrigger>
                       <SelectValue placeholder="Select a role" />
                     </SelectTrigger>
-                    <SelectContent>
-                      {UserRoles.map((role, index) => (
-                        <SelectItem key={index} value={role}>
-                          {role}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </FormControl>
+                  </FormControl>
+                  <SelectContent>
+                    {userRoles.map((role, index) => (
+                      <SelectItem
+                        key={index}
+                        value={role}
+                        className="uppercase"
+                      >
+                        {role}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
               </FormItem>
             )}
           />
-
           <Button type="submit">Submit</Button>
         </form>
       </Form>

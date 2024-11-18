@@ -9,3 +9,5 @@ export type UserType = {
   role: string;
   image?: string;
 };
+
+export type roleType = 'admin' | 'moderator' | 'user';

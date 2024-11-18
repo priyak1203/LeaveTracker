@@ -8,6 +8,7 @@ import {
 } from '@/components/ui/dialog';
 import { type IconType } from 'react-icons/lib';
 import { Button } from '@/components/ui/button';
+import React from 'react';
 
 type DialogPropsType = {
   children: React.ReactNode;
@@ -37,7 +38,9 @@ function DialogWrapper({
           <Button className="text-white">{btnTitle}</Button>
         ) : (
           Icon && (
-            <Icon className="text-purple-600 cursor-pointer h-5 w-5 mx-auto" />
+            <span>
+              <Icon className="text-purple-600 cursor-pointer h-5 w-5 mx-auto" />
+            </span>
           )
         )}
       </DialogTrigger>
