@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getAllUsers } from '../controllers/userController.js';
+import { getAllUsers, updateUserInfo } from '../controllers/userController.js';
 import {
   authenticateUser,
   authorizePermissions,
@@ -12,6 +12,13 @@ router.get(
   authenticateUser,
   authorizePermissions('admin'),
   getAllUsers
+);
+
+router.patch(
+  '/:id',
+  authenticateUser,
+  authorizePermissions('admin'),
+  updateUserInfo
 );
 
 export default router;

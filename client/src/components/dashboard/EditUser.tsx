@@ -23,6 +23,9 @@ import { z } from 'zod';
 import { departments, titles, userRoles } from '@/utils/sampleData';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { roleType, type UserType } from '@/utils/types';
+import customFetch from '@/utils/axios';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 type EditUserPropsType = {
   user: UserType;
@@ -37,6 +40,7 @@ const EditUserSchema = z.object({
 
 function EditUser({ user }: EditUserPropsType) {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
   const form = useForm<z.infer<typeof EditUserSchema>>({
     resolver: zodResolver(EditUserSchema),
@@ -48,8 +52,17 @@ function EditUser({ user }: EditUserPropsType) {
     },
   });
 
-  function onSubmit(values: z.infer<typeof EditUserSchema>) {
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof EditUserSchema>) {
+    try {
+      const { data } = await customFetch.patch(`/users/${user._id}`, values);
+      toast.success(data.msg);
+      setOpen(false);
+      form.reset();
+      navigate('/dashboard/users');
+    } catch (error: any) {
+      const errMsg = error?.response?.data?.msg || `Something went wrong`;
+      toast.error(errMsg);
+    }
   }
 
   return (

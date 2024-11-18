@@ -1,4 +1,6 @@
 import { z } from 'zod';
+import { isValidObjectId } from 'mongoose';
+import { BadRequestError } from '../errors/customErrors.js';
 
 const validateWithZodSchema = (schema, data) => {
   const result = schema.safeParse(data);
@@ -56,4 +58,28 @@ const leaveInputSchema = z.object({
 
 export const validateUserLeaveInput = (data) => {
   return validateWithZodSchema(leaveInputSchema, data);
+};
+
+// Update User Info Schema
+const updateUserInfoSchema = z.object({
+  phone: z.string().max(10).optional(),
+  department: z.string({ required_error: 'department is required' }),
+  jobTitle: z.string({ required_error: 'job title is required' }),
+  role: z.enum(['admin', 'user', 'moderator'], {
+    required_error: 'user role is required',
+  }),
+});
+
+export const validateUpdateUserInfo = (data) => {
+  return validateWithZodSchema(updateUserInfoSchema, data);
+};
+
+// const validIdSchema = z.object({
+//   id: z.instanceof(Objectid),
+// });
+
+export const validateId = (id) => {
+  const isValid = isValidObjectId(id);
+  if (!isValid) throw new BadRequestError('Invalid MongoDB id');
+  return isValid;
 };
