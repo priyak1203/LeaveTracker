@@ -31,6 +31,8 @@ import {
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
+import customFetch from '@/utils/axios';
+import { AppContextType, useAppContext } from '@/context/appContext';
 
 const LeaveSchema = z.object({
   leaveType: z.string({ required_error: 'Please select a leave type' }),
@@ -42,6 +44,8 @@ const LeaveSchema = z.object({
 function RequestForm() {
   const [open, setOpen] = useState(false);
 
+  const { user } = useAppContext() as AppContextType;
+
   const form = useForm<z.infer<typeof LeaveSchema>>({
     resolver: zodResolver(LeaveSchema),
     defaultValues: {
@@ -49,9 +53,22 @@ function RequestForm() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof LeaveSchema>) {
-    console.log(values);
-    console.log(values.startDate.toISOString());
+  async function onSubmit(values: z.infer<typeof LeaveSchema>) {
+    const inputValues = {
+      ...values,
+      userName: user?.name,
+      userEmail: user?.email,
+    };
+
+    try {
+      const response = await customFetch.post(
+        '/leave/apply-leave',
+        inputValues
+      );
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (

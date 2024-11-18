@@ -38,3 +38,22 @@ const loginUserSchema = z.object({
 export const validateLoginUserInput = (data) => {
   return validateWithZodSchema(loginUserSchema, data);
 };
+
+// Leave Input Schema
+const leaveInputSchema = z.object({
+  leaveType: z.enum(
+    ['annual', 'health', 'study', 'family', 'maternity', 'paternity', 'unpaid'],
+    {
+      required_error: 'leave type is required',
+    }
+  ),
+  startDate: z.string({ required_error: 'start date is required' }),
+  endDate: z.string({ required_error: 'end date is required' }),
+  userNotes: z.string().max(500).optional(),
+  userName: z.string({ required_error: 'username is required' }),
+  userEmail: z.string().email({ required_error: 'user email is required' }),
+});
+
+export const validateUserLeaveInput = (data) => {
+  return validateWithZodSchema(leaveInputSchema, data);
+};

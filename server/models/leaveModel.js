@@ -23,7 +23,7 @@ const LeaveSchema = new mongoose.Schema(
     days: Number,
     userName: String,
     userEmail: String,
-    userNote: String,
+    userNotes: String,
     leaveStatus: {
       type: String,
       enum: ['pending', 'approved', 'inmoderation', 'rejected'],
