@@ -33,12 +33,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
 import customFetch from '@/utils/axios';
 import { AppContextType, useAppContext } from '@/context/appContext';
+import toast from 'react-hot-toast';
 
 const LeaveSchema = z.object({
   leaveType: z.string({ required_error: 'Please select a leave type' }),
   startDate: z.date({ required_error: 'A start date is required' }),
   endDate: z.date({ required_error: 'An end date is required' }),
-  notes: z.string().max(500).optional(),
+  userNotes: z.string().max(500).optional(),
 });
 
 function RequestForm() {
@@ -49,7 +50,7 @@ function RequestForm() {
   const form = useForm<z.infer<typeof LeaveSchema>>({
     resolver: zodResolver(LeaveSchema),
     defaultValues: {
-      notes: '',
+      userNotes: '',
     },
   });
 
@@ -61,13 +62,16 @@ function RequestForm() {
     };
 
     try {
-      const response = await customFetch.post(
+      const { data } = await customFetch.post(
         '/leave/apply-leave',
         inputValues
       );
-      console.log(response);
-    } catch (error) {
-      console.log(error);
+      toast.success(data.msg);
+      setOpen(false);
+      form.reset();
+    } catch (error: any) {
+      const errMsg = error?.response?.data?.msg || `Something went wrong.`;
+      toast.error(errMsg);
     }
   }
 
@@ -207,7 +211,7 @@ function RequestForm() {
           {/* NOTES */}
           <FormField
             control={form.control}
-            name="notes"
+            name="userNotes"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Notes</FormLabel>

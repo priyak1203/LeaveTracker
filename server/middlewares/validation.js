@@ -49,7 +49,7 @@ const leaveInputSchema = z.object({
   ),
   startDate: z.string({ required_error: 'start date is required' }),
   endDate: z.string({ required_error: 'end date is required' }),
-  userNotes: z.string().max(500).optional(),
+  userNotes: z.string().max(200).optional(),
   userName: z.string({ required_error: 'username is required' }),
   userEmail: z.string().email({ required_error: 'user email is required' }),
 });

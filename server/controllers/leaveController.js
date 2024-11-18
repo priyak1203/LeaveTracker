@@ -1,20 +1,43 @@
+import { BadRequestError } from '../errors/customErrors.js';
 import { validateUserLeaveInput } from '../middlewares/validation.js';
+import { differenceInDays } from 'date-fns';
+import Leave from '../models/leaveModel.js';
 
-export const applyforLeave = (req, res) => {
-  console.log('request body', req.body);
-  console.log('user', req.user);
-  const { leaveType, startDate, endDate, notes, userName, userEmail } =
-    req.body;
+export const applyforLeave = async (req, res) => {
+  // validating input
+  const validData = validateUserLeaveInput(req.body);
+  const { leaveType, startDate, endDate, username, userEmail, userNotes } =
+    validData;
+
+  const days = differenceInDays(endDate, startDate) + 1;
+  // checking for valid dates
+  if (days < 1) {
+    throw new BadRequestError('Start date should be greater than End Date');
+  }
+
+  //check for existing leaves
+  const existingLeave = await Leave.find({
+    $and: [{ user: req.user.userId }, { $or: [{ startDate }, { endDate }] }],
+  });
+  if (existingLeave.length !== 0) {
+    throw new BadRequestError('Leave entry already exists for these dates');
+  }
+
+  const year = new Date().getFullYear().toString();
+
   const leaveData = {
     leaveType,
+    year,
     startDate,
     endDate,
-    notes,
-    userName,
+    days,
+    username,
     userEmail,
+    userNotes,
+    user: req.user.userId,
   };
-  const validData = validateUserLeaveInput(leaveData);
-  console.log(validData);
 
-  res.status(201).json({ msg: 'apply for leave' });
+  const leave = await Leave.create(leaveData);
+
+  res.status(201).json({ msg: 'Leave Applied Successfully' });
 };
