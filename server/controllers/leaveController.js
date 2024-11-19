@@ -42,3 +42,7 @@ export const applyforLeave = async (req, res) => {
 
   res.status(StatusCodes.CREATED).json({ msg: 'Leave Applied Successfully' });
 };
+
+export const addLeaveCredits = async (req, res) => {
+  res.status(StatusCodes.OK).json({ msg: 'add leave credits' });
+};
