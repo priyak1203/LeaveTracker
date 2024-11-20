@@ -1,33 +1,43 @@
 import { FaPlus } from 'react-icons/fa6';
 import DialogWrapper from '@/components/globals/DialogWrapper';
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-} from '@/components/ui/form';
-import { useForm } from 'react-hook-form';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import { useState } from 'react';
+import { Label } from '../ui/label';
 
 const leaveCreditNames = [
-  { label: 'Annual Credit', value: 'annualCredit' },
-  { label: 'Health Credit', value: 'healthCredit' },
-  { label: 'Study Credit', value: 'studyCredit' },
-  { label: 'Family Credit', value: 'familyCredit' },
-  { label: 'Maternity Credit', value: 'maternityCredit' },
-  { label: 'Paternity Credit', value: 'paternityCredit' },
+  { label: 'Annual Credit', type: 'annualCredit' },
+  { label: 'Health Credit', type: 'healthCredit' },
+  { label: 'Study Credit', type: 'studyCredit' },
+  { label: 'Family Credit', type: 'familyCredit' },
+  { label: 'Maternity Credit', type: 'maternityCredit' },
+  { label: 'Paternity Credit', type: 'paternityCredit' },
 ];
+
+const initialCreditValues: { [key: string]: number } = {
+  annualCredit: 0,
+  healthCredit: 0,
+  studyCredit: 0,
+  familyCredit: 0,
+  maternityCredit: 0,
+  paternityCredit: 0,
+};
 
 function AddCredits() {
   const [open, setOpen] = useState(false);
+  const [creditValues, setCreditValues] = useState(initialCreditValues);
 
-  const form = useForm<any>({});
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setCreditValues((prevValues) => ({
+      ...prevValues,
+      [e.target.name]: e.target.valueAsNumber,
+    }));
+  }
 
-  function onSubmit(values: any) {
-    console.log(values);
+  function submitCredits(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    console.log('form submitted');
+    console.log(creditValues);
   }
 
   return (
@@ -39,32 +49,25 @@ function AddCredits() {
       open={open}
       setOpen={() => setOpen(!open)}
     >
-      <Form {...form}>
-        <form className="space-y-2" onSubmit={form.handleSubmit(onSubmit)}>
-          {leaveCreditNames.map(({ label, value }) => {
-            return (
-              <FormField
-                key={label}
-                control={form.control}
-                name={`${value}`}
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{`${label}`}</FormLabel>
-                    <FormControl>
-                      <Input
-                        type="number"
-                        onChange={field.onChange}
-                        value={field.value}
-                      />
-                    </FormControl>
-                  </FormItem>
-                )}
+      <form onSubmit={submitCredits}>
+        {leaveCreditNames.map(({ label, type }) => {
+          return (
+            <div key={label} className="my-2">
+              <Label htmlFor={type}>{label}</Label>
+              <Input
+                type="number"
+                name={type}
+                value={creditValues[type]}
+                onChange={handleChange}
               />
-            );
-          })}
-          <Button type="submit">Submit</Button>
-        </form>
-      </Form>
+            </div>
+          );
+        })}
+
+        <Button type="submit" className="my-2">
+          Submit
+        </Button>
+      </form>
     </DialogWrapper>
   );
 }
