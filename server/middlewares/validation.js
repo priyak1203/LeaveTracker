@@ -74,12 +74,25 @@ export const validateUpdateUserInfo = (data) => {
   return validateWithZodSchema(updateUserInfoSchema, data);
 };
 
-// const validIdSchema = z.object({
-//   id: z.instanceof(Objectid),
-// });
-
 export const validateId = (id) => {
   const isValid = isValidObjectId(id);
   if (!isValid) throw new BadRequestError('Invalid MongoDB id');
   return isValid;
+};
+
+// Add Credits Schema
+const addCreditSchema = z.object({
+  year: z.string(),
+  annualCredit: z.number().max(10),
+  healthCredit: z.number().max(10),
+  studyCredit: z.number().max(10),
+  familyCredit: z.number().max(10),
+  maternityCredit: z.number().max(10).optional(),
+  paternityCredit: z.number().max(10).optional(),
+  userName: z.string().optional(),
+  userEmail: z.string().optional(),
+});
+
+export const validateAddLeaveCredits = (data) => {
+  return validateWithZodSchema(addCreditSchema, data);
 };

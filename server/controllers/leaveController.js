@@ -1,8 +1,13 @@
 import { BadRequestError } from '../errors/customErrors.js';
-import { validateUserLeaveInput } from '../middlewares/validation.js';
+import {
+  validateAddLeaveCredits,
+  validateId,
+  validateUserLeaveInput,
+} from '../middlewares/validation.js';
 import { differenceInDays } from 'date-fns';
 import Leave from '../models/leaveModel.js';
 import { StatusCodes } from 'http-status-codes';
+import Balances from '../models/balancesModel.js';
 
 export const applyforLeave = async (req, res) => {
   // validating input
@@ -44,5 +49,32 @@ export const applyforLeave = async (req, res) => {
 };
 
 export const addLeaveCredits = async (req, res) => {
-  res.status(StatusCodes.OK).json({ msg: 'add leave credits' });
+  const { userId } = req.body;
+
+  // validate UserId
+  validateId(userId);
+
+  // validate input
+  const validData = validateAddLeaveCredits(req.body);
+  const { year } = validData;
+
+  // check for existing credits
+  const existingCredits = await Balances.find({
+    user: userId,
+    year,
+  });
+
+  if (existingCredits.length > 0) {
+    throw new BadRequestError(`Credits for the year ${year} already exists`);
+  }
+
+  const creditsData = {
+    ...validData,
+    user: userId,
+  };
+
+  // update user balance
+  const credits = await Balances.create(creditsData);
+
+  res.status(StatusCodes.OK).json({ msg: 'Credits added successfully' });
 };

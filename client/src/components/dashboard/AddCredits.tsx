@@ -1,9 +1,16 @@
 import { FaPlus } from 'react-icons/fa6';
 import DialogWrapper from '@/components/globals/DialogWrapper';
-import { Input } from '../ui/input';
-import { Button } from '../ui/button';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 import { useState } from 'react';
-import { Label } from '../ui/label';
+import { Label } from '@/components/ui/label';
+import { type UserType } from '@/utils/types';
+import customFetch from '@/utils/axios';
+import toast from 'react-hot-toast';
+
+type AddCreditPropsType = {
+  user: UserType;
+};
 
 const leaveCreditNames = [
   { label: 'Annual Credit', type: 'annualCredit' },
@@ -23,7 +30,7 @@ const initialCreditValues: { [key: string]: number } = {
   paternityCredit: 0,
 };
 
-function AddCredits() {
+function AddCredits({ user }: AddCreditPropsType) {
   const [open, setOpen] = useState(false);
   const [creditValues, setCreditValues] = useState(initialCreditValues);
 
@@ -34,10 +41,30 @@ function AddCredits() {
     }));
   }
 
-  function submitCredits(e: React.FormEvent<HTMLFormElement>) {
+  async function submitCredits(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    console.log('form submitted');
-    console.log(creditValues);
+
+    const year = new Date().getFullYear().toString();
+    const creditData = {
+      year,
+      userId: user._id,
+      userName: user.name,
+      userEmail: user.email,
+      ...creditValues,
+    };
+
+    try {
+      const { data } = await customFetch.post(
+        `/leave/add-leave-credits`,
+        creditData
+      );
+      toast.success(data.msg);
+    } catch (error: any) {
+      const errMsg = error?.response?.data?.msg || `Something went wrong`;
+      toast.error(errMsg);
+    }
+    setOpen(false);
+    setCreditValues(initialCreditValues);
   }
 
   return (

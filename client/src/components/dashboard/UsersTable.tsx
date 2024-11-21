@@ -96,7 +96,7 @@ function UsersTable() {
                 <EditUser user={user} />
               </TableCell>
               <TableCell>
-                <AddCredits />
+                <AddCredits user={user} />
               </TableCell>
             </TableRow>
           );
