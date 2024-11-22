@@ -125,59 +125,6 @@ export const balancesData = [
   },
 ];
 
-// Portal Page Mock Data
-export const userLeaveBalances = [
-  {
-    year: '2023',
-    leaveType: 'ANNUAL',
-    credit: 22,
-    used: 19,
-    balance: 3,
-  },
-  {
-    year: '2023',
-    leaveType: 'HEALTH',
-    credit: 15,
-    used: 5,
-    balance: 10,
-  },
-  {
-    year: '2023',
-    leaveType: 'MATERNITY',
-    credit: 20,
-    used: 8,
-    balance: 12,
-  },
-  {
-    year: '2023',
-    leaveType: 'STUDY',
-    credit: 10,
-    used: 3,
-    balance: 7,
-  },
-  {
-    year: '2023',
-    leaveType: 'FAMILY',
-    credit: 18,
-    used: 6,
-    balance: 12,
-  },
-  {
-    year: '2023',
-    leaveType: 'PATERNITY',
-    credit: 12,
-    used: 4,
-    balance: 8,
-  },
-  {
-    year: '2023',
-    leaveType: 'UNPAID',
-    credit: 0,
-    used: 5,
-    balance: -5,
-  },
-];
-
 export const leaveHistory = [
   {
     id: 1,

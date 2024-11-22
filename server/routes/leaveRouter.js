@@ -2,6 +2,7 @@ import { Router } from 'express';
 import {
   addLeaveCredits,
   applyforLeave,
+  getUserBalances,
 } from '../controllers/leaveController.js';
 import {
   authenticateUser,
@@ -17,5 +18,7 @@ router.post(
   authorizePermissions('admin'),
   addLeaveCredits
 );
+
+router.get('/user-balance', authenticateUser, getUserBalances);
 
 export default router;

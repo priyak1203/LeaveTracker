@@ -56,7 +56,15 @@ export const addLeaveCredits = async (req, res) => {
 
   // validate input
   const validData = validateAddLeaveCredits(req.body);
-  const { year } = validData;
+  const {
+    year,
+    annualCredit,
+    healthCredit,
+    studyCredit,
+    familyCredit,
+    maternityCredit,
+    paternityCredit,
+  } = validData;
 
   // check for existing credits
   const existingCredits = await Balances.find({
@@ -70,6 +78,12 @@ export const addLeaveCredits = async (req, res) => {
 
   const creditsData = {
     ...validData,
+    annualAvailable: annualCredit,
+    healthAvailable: healthCredit,
+    studyAvailable: studyCredit,
+    familyAvailable: familyCredit,
+    maternityAvailable: maternityCredit,
+    paternityAvailable: paternityCredit,
     user: userId,
   };
 
@@ -77,4 +91,13 @@ export const addLeaveCredits = async (req, res) => {
   const credits = await Balances.create(creditsData);
 
   res.status(StatusCodes.OK).json({ msg: 'Credits added successfully' });
+};
+
+export const getUserBalances = async (req, res) => {
+  const { userId } = req.user;
+  const year = new Date().getFullYear().toString();
+
+  const userBalances = await Balances.find({ user: userId, year });
+
+  res.status(StatusCodes.OK).json({ userBalances });
 };

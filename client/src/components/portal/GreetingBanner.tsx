@@ -8,7 +8,7 @@ function GreetingBanner() {
   return (
     <Container>
       <div className="flex flex-wrap justify-between items-center my-4 ">
-        <h1 className="text-lg font-bold leading-tight lg:text-xl">
+        <h1 className="text-lg font-bold leading-tight lg:text-xl capitalize">
           Welcome {user?.name || 'user'}
         </h1>
         <RequestForm />

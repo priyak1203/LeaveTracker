@@ -12,6 +12,8 @@ import {
 import { History, Portal, PortalLayout } from './pages/portalPages';
 
 import { loader as userLoader } from './components/dashboard/UsersTable';
+import { loader as portalLoader } from './pages/portalPages/Portal';
+
 import ProtectedRoute from './pages/ProtectedRoute';
 
 const router = createBrowserRouter([
@@ -45,7 +47,7 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
         children: [
-          { index: true, element: <Portal /> },
+          { index: true, element: <Portal />, loader: portalLoader },
           { path: 'history', element: <History /> },
         ],
       },

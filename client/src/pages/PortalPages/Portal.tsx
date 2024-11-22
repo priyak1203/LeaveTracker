@@ -1,21 +1,30 @@
 import GreetingBanner from '@/components/portal/GreetingBanner';
 import PortalCalendar from '@/components/portal/PortalCalendar';
 import UserBalances from '@/components/portal/UserBalances';
+import customFetch from '@/utils/axios';
+import { type UserBalancesType } from '@/utils/types';
+import { useLoaderData } from 'react-router-dom';
+
+export const loader = async () => {
+  const { data } = await customFetch.get('/leave/user-balance');
+  const userBalances: UserBalancesType[] = data.userBalances;
+  return userBalances;
+};
 
 function PortalPage() {
-  // temp
-  const currentYearBalances = 20;
+  const userBalances = useLoaderData() as UserBalancesType[];
+
   return (
     <>
       <GreetingBanner />
       <PortalCalendar />
 
       <h2 className="mt-10 text-lg text-center font-semibold leading-tight lg:text-xl">
-        {!currentYearBalances
-          ? 'No Balances Data found...'
+        {userBalances.length === 0
+          ? 'No Balances Data found!'
           : 'Current Year Balances'}
       </h2>
-      <UserBalances />
+      {userBalances.length > 0 && <UserBalances balance={userBalances} />}
     </>
   );
 }
