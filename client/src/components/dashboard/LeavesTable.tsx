@@ -6,7 +6,18 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { leavesData } from '@/utils/mockData';
+import customFetch from '@/utils/axios';
+import { type UserLeavesType } from '@/utils/types';
+import dayjs from 'dayjs';
+import { useLoaderData } from 'react-router-dom';
+import { Badge } from '../ui/badge';
+import { formatDistance, parseISO, subDays } from 'date-fns';
+
+export const loader = async () => {
+  const { data } = await customFetch.get('/leave/all-leaves');
+  const allLeaves: UserLeavesType[] = data.allLeaves;
+  return allLeaves;
+};
 
 function LeavesTable() {
   const tableHeadData = [
@@ -23,6 +34,7 @@ function LeavesTable() {
     'Updated Notes',
     'Updated By',
   ];
+  const allUserLeaves = useLoaderData() as UserLeavesType[];
 
   return (
     <Table>
@@ -34,22 +46,53 @@ function LeavesTable() {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {leavesData.map((leave) => (
-          <TableRow key={leave.id}>
-            <TableCell>edit</TableCell>
-            <TableCell>{leave.name}</TableCell>
-            <TableCell>{leave.type}</TableCell>
-            <TableCell>{leave.year}</TableCell>
-            <TableCell></TableCell>
-            <TableCell></TableCell>
-            <TableCell></TableCell>
-            <TableCell>{leave.status}</TableCell>
-            <TableCell>{leave.req_note}</TableCell>
-            <TableCell>{leave.updated}</TableCell>
-            <TableCell>{leave.updated_note}</TableCell>
-            <TableCell>{leave.updatedBy}</TableCell>
-          </TableRow>
-        ))}
+        {allUserLeaves.map((leave) => {
+          const {
+            _id: leaveId,
+            userName,
+            leaveType,
+            year,
+            createdAt,
+            startDate,
+            endDate,
+            days,
+            leaveStatus,
+            userNotes,
+            updatedAt,
+            moderatorName,
+            moderatorNotes,
+          } = leave;
+
+          const updated = parseISO(updatedAt as string);
+
+          return (
+            <TableRow key={leaveId}>
+              <TableCell>edit</TableCell>
+              <TableCell className="capitalize">{userName}</TableCell>
+              <TableCell className="capitalize">{leaveType}</TableCell>
+              <TableCell>{year}</TableCell>
+              <TableCell>
+                {dayjs(createdAt).format('DD/MM/YYYY HH:mm')}
+              </TableCell>
+              <TableCell>
+                <span>{dayjs(startDate).format('DD/MM/YYYY')}</span> {' - '}
+                <span>{dayjs(endDate).format('DD/MM/YYYY')}</span>
+              </TableCell>
+              <TableCell>{days}</TableCell>
+              <TableCell className="capitalize">
+                <Badge>{leaveStatus}</Badge>
+              </TableCell>
+              <TableCell>{userNotes}</TableCell>
+              <TableCell>
+                {formatDistance(subDays(new Date(updated), 0), new Date(), {
+                  addSuffix: true,
+                })}
+              </TableCell>
+              <TableCell>{moderatorNotes}</TableCell>
+              <TableCell>{moderatorName}</TableCell>
+            </TableRow>
+          );
+        })}
       </TableBody>
     </Table>
   );

@@ -38,6 +38,7 @@ const LeaveSchema = new mongoose.Schema(
       type: mongoose.Types.ObjectId,
       ref: 'Moderator',
     },
+    moderatorName: String,
     moderatorNotes: String,
   },
   { timestamps: true }

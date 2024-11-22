@@ -38,3 +38,22 @@ export type UserBalancesType = {
   userEmail?: string;
   user: string;
 };
+
+export type UserLeavesType = {
+  _id: string;
+  leaveType: string;
+  year: string;
+  startDate: string;
+  endDate: string;
+  days?: number;
+  userName?: string;
+  userEmail?: string;
+  userNotes?: string;
+  leaveStatus?: string;
+  user?: string;
+  moderator?: string;
+  moderatorName?: string;
+  moderatorNotes?: string;
+  createdAt?: string;
+  updatedAt?: string;
+};

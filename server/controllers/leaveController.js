@@ -12,7 +12,7 @@ import Balances from '../models/balancesModel.js';
 export const applyforLeave = async (req, res) => {
   // validating input
   const validData = validateUserLeaveInput(req.body);
-  const { leaveType, startDate, endDate, username, userEmail, userNotes } =
+  const { leaveType, startDate, endDate, userName, userEmail, userNotes } =
     validData;
 
   const days = differenceInDays(endDate, startDate) + 1;
@@ -37,7 +37,7 @@ export const applyforLeave = async (req, res) => {
     startDate,
     endDate,
     days,
-    username,
+    userName,
     userEmail,
     userNotes,
     user: req.user.userId,
@@ -100,4 +100,9 @@ export const getUserBalances = async (req, res) => {
   const userBalances = await Balances.find({ user: userId, year });
 
   res.status(StatusCodes.OK).json({ userBalances });
+};
+
+export const getAllLeaves = async (req, res) => {
+  const allLeaves = await Leave.find({});
+  res.status(StatusCodes.OK).json({ allLeaves });
 };
