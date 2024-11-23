@@ -8,6 +8,19 @@ export const leaveTypes = [
   { label: 'Unpaid', value: 'unpaid' },
 ] as const;
 
+// export const leaveStatus = [
+//   { label: 'Pending', value: 'pending' },
+//   { label: 'Approved', value: 'approved' },
+//   { label: 'Inmoderation', value: 'inmoderation' },
+//   { label: 'Rejected', value: 'rejected' },
+// ] as const;
+export const leaveStatus = [
+  'pending',
+  'approved',
+  'inmoderation',
+  'rejected',
+] as const;
+
 export const departments = [
   {
     label: 'finance',

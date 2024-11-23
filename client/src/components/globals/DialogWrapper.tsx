@@ -10,9 +10,12 @@ import { type IconType } from 'react-icons/lib';
 import { Button } from '@/components/ui/button';
 import React from 'react';
 
+type BtnSizeType = 'default' | 'icon' | 'sm' | 'lg' | null | undefined;
+
 type DialogPropsType = {
   children: React.ReactNode;
   isBtn: boolean;
+  btnSize?: BtnSizeType;
   btnTitle?: string;
   title?: string;
   description?: string;
@@ -24,6 +27,7 @@ type DialogPropsType = {
 function DialogWrapper({
   children,
   isBtn,
+  btnSize,
   btnTitle,
   title,
   description,
@@ -35,7 +39,9 @@ function DialogWrapper({
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         {isBtn ? (
-          <Button className="text-white">{btnTitle}</Button>
+          <Button className="text-white" size={btnSize}>
+            {btnTitle}
+          </Button>
         ) : (
           Icon && (
             <span>

@@ -12,6 +12,7 @@ import dayjs from 'dayjs';
 import { useLoaderData } from 'react-router-dom';
 import { Badge } from '../ui/badge';
 import { formatDistance, parseISO, subDays } from 'date-fns';
+import EditLeave from './EditLeave';
 
 export const loader = async () => {
   const { data } = await customFetch.get('/leave/all-leaves');
@@ -67,7 +68,9 @@ function LeavesTable() {
 
           return (
             <TableRow key={leaveId}>
-              <TableCell>edit</TableCell>
+              <TableCell>
+                <EditLeave />
+              </TableCell>
               <TableCell className="capitalize">{userName}</TableCell>
               <TableCell className="capitalize">{leaveType}</TableCell>
               <TableCell>{year}</TableCell>
