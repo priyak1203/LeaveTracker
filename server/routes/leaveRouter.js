@@ -4,6 +4,7 @@ import {
   applyforLeave,
   getAllLeaves,
   getUserBalances,
+  updateLeave,
 } from '../controllers/leaveController.js';
 import {
   authenticateUser,
@@ -26,6 +27,13 @@ router.get(
   authenticateUser,
   authorizePermissions('admin'),
   getAllLeaves
+);
+
+router.patch(
+  '/:id',
+  authenticateUser,
+  authorizePermissions('admin'),
+  updateLeave
 );
 
 export default router;

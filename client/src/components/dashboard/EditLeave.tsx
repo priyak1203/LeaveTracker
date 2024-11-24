@@ -21,14 +21,24 @@ import { Textarea } from '../ui/textarea';
 import { Button } from '../ui/button';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { UserLeavesType } from '@/utils/types';
+import customFetch from '@/utils/axios';
+import { AppContextType, useAppContext } from '@/context/appContext';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
+
+type EditLeavePropsType = {
+  leave: UserLeavesType;
+};
 
 const EditLeaveScheme = z.object({
   notes: z.string().max(200).optional(),
   leaveStatus: z.enum(leaveStatus),
 });
 
-function EditLeave() {
+function EditLeave({ leave }: EditLeavePropsType) {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
   const form = useForm<z.infer<typeof EditLeaveScheme>>({
     resolver: zodResolver(EditLeaveScheme),
     defaultValues: {
@@ -36,8 +46,46 @@ function EditLeave() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof EditLeaveScheme>) {
-    console.log(values);
+  const { user: loggedInUser } = useAppContext() as AppContextType;
+
+  const {
+    _id: leaveId,
+    days,
+    leaveType,
+    year,
+    startDate,
+    userName,
+    userEmail,
+    user: userId,
+  } = leave;
+
+  async function onSubmit(values: z.infer<typeof EditLeaveScheme>) {
+    const inputValues = {
+      ...values,
+      days,
+      leaveType,
+      year,
+      userId,
+      userEmail,
+      userName,
+      startDate,
+      moderatorId: loggedInUser?._id,
+      moderatorName: loggedInUser?.name,
+    };
+
+    try {
+      const { data } = await customFetch.patch(
+        `/leave/${leaveId}`,
+        inputValues
+      );
+      setOpen(false);
+      toast.success(data.msg);
+      form.reset();
+      navigate('/dashboard/leaves');
+    } catch (error: any) {
+      const errMsg = error?.response?.data?.msg || `Something went wrong`;
+      toast.error(errMsg);
+    }
   }
 
   return (
@@ -60,7 +108,7 @@ function EditLeave() {
                 <FormLabel>Leave Status</FormLabel>
                 <Select onValueChange={field.onChange} value={field.value}>
                   <FormControl>
-                    <SelectTrigger>
+                    <SelectTrigger className="capitalize">
                       <SelectValue placeholder="Select a status" />
                     </SelectTrigger>
                   </FormControl>

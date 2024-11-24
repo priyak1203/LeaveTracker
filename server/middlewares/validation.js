@@ -96,3 +96,32 @@ const addCreditSchema = z.object({
 export const validateAddLeaveCredits = (data) => {
   return validateWithZodSchema(addCreditSchema, data);
 };
+
+// Edit Leave Schema
+const editLeaveSchema = z.object({
+  notes: z.string().max(200).optional(),
+  leaveStatus: z.enum(['pending', 'approved', 'inmoderation', 'rejected'], {
+    required_error: 'Please provide status',
+  }),
+  days: z.number(),
+  leaveType: z.enum([
+    'annual',
+    'health',
+    'study',
+    'family',
+    'maternity',
+    'paternity',
+    'unpaid',
+  ]),
+  year: z.string(),
+  userId: z.string(),
+  userEmail: z.string(),
+  userName: z.string().optional(),
+  startDate: z.string(),
+  moderatorId: z.string(),
+  moderatorName: z.string(),
+});
+
+export const validateEditLeave = (data) => {
+  return validateWithZodSchema(editLeaveSchema, data);
+};

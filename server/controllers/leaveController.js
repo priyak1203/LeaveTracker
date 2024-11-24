@@ -1,6 +1,7 @@
 import { BadRequestError } from '../errors/customErrors.js';
 import {
   validateAddLeaveCredits,
+  validateEditLeave,
   validateId,
   validateUserLeaveInput,
 } from '../middlewares/validation.js';
@@ -105,4 +106,60 @@ export const getUserBalances = async (req, res) => {
 export const getAllLeaves = async (req, res) => {
   const allLeaves = await Leave.find({});
   res.status(StatusCodes.OK).json({ allLeaves });
+};
+
+export const updateLeave = async (req, res) => {
+  const { id: leaveId } = req.params;
+
+  // Validate Leave Id
+  validateId(leaveId);
+  // Validate input
+  const validData = validateEditLeave(req.body);
+
+  const {
+    leaveStatus,
+    leaveType,
+    days,
+    userId,
+    year,
+    notes,
+    moderatorName,
+    moderatorId,
+  } = validData;
+
+  if (leaveStatus === 'approved') {
+    // Check for the balance
+    const balance = await Balances.findOne({ user: userId, year });
+    if (!balance)
+      throw new BadRequestError(
+        'Balance not found for the specified user and year'
+      );
+
+    // Check if there is enough balance
+    const leaveAvailable = balance[`${leaveType}Available`];
+    if (leaveAvailable < days) {
+      throw new BadRequestError('Not enough leaves available');
+    }
+
+    // Update balance
+    balance[`${leaveType}Available`] = balance[`${leaveType}Available`] - days;
+    balance[`${leaveType}Used`] = days;
+    await balance.save();
+  }
+
+  // Update leave
+  const leaveUpdateObject = {
+    leaveStatus,
+    moderatorNotes: notes,
+    moderatorName,
+    moderator: moderatorId,
+  };
+
+  const updatedLeave = await Leave.findOneAndUpdate(
+    { _id: leaveId },
+    leaveUpdateObject,
+    { new: true }
+  );
+
+  res.status(StatusCodes.OK).json({ msg: 'Leave Updated' });
 };

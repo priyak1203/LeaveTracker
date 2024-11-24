@@ -69,7 +69,7 @@ function LeavesTable() {
           return (
             <TableRow key={leaveId}>
               <TableCell>
-                <EditLeave />
+                <EditLeave leave={leave} />
               </TableCell>
               <TableCell className="capitalize">{userName}</TableCell>
               <TableCell className="capitalize">{leaveType}</TableCell>
