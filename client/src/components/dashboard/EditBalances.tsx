@@ -5,6 +5,9 @@ import { Label } from '../ui/label';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import { UserBalancesType } from '@/utils/types';
+import customFetch from '@/utils/axios';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const balanceCategories = [
   { label: 'annual credit', value: 'annualCredit' },
@@ -42,7 +45,6 @@ type ActionType = {
 };
 
 function EditBalances({ balance }: EditBalancesPropsType) {
-  //   console.log(balance);
   const initialState: StateType = {
     annualCredit: balance.annualCredit,
     annualUsed: balance.annualUsed,
@@ -71,6 +73,7 @@ function EditBalances({ balance }: EditBalancesPropsType) {
 
   const [open, setOpen] = useState(false);
   const [state, dispatch] = useReducer(reducer, initialState);
+  const navigate = useNavigate();
 
   const handleInputChange =
     (type: string) => (e: FormEvent<HTMLInputElement>) => {
@@ -84,10 +87,20 @@ function EditBalances({ balance }: EditBalancesPropsType) {
   //     });
   //   };
 
-  function onSubmit(e: FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    console.log(balance._id);
-    console.log(state);
+    try {
+      const { data } = await customFetch.patch(
+        `/leave/balances/${balance._id}`,
+        state
+      );
+      toast.success(data.msg);
+      setOpen(false);
+      navigate('/dashboard/balances');
+    } catch (error: any) {
+      const errMsg = error?.response?.data?.msg || `Something went wrong`;
+      toast.error(errMsg);
+    }
   }
 
   return (

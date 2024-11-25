@@ -1,14 +1,15 @@
 import { BadRequestError } from '../errors/customErrors.js';
 import {
   validateAddLeaveCredits,
+  validateEditBalance,
   validateEditLeave,
   validateId,
   validateUserLeaveInput,
 } from '../middlewares/validation.js';
 import { differenceInDays } from 'date-fns';
+import Balances from '../models/balancesModel.js';
 import Leave from '../models/leaveModel.js';
 import { StatusCodes } from 'http-status-codes';
-import Balances from '../models/balancesModel.js';
 
 export const applyforLeave = async (req, res) => {
   // validating input
@@ -167,4 +168,21 @@ export const updateLeave = async (req, res) => {
 export const getAllBalances = async (req, res) => {
   const balances = await Balances.find();
   res.status(StatusCodes.OK).json({ balances });
+};
+
+export const updateBalance = async (req, res) => {
+  const { id: balanceId } = req.params;
+
+  // Validate Balance Id
+  validateId(balanceId);
+  // Validate input data
+  const validData = validateEditBalance(req.body);
+
+  const updatedBalance = await Balances.findOneAndUpdate(
+    { _id: balanceId },
+    validData,
+    { new: true }
+  );
+
+  res.status(StatusCodes.OK).json({ msg: 'Balance updated successfully' });
 };

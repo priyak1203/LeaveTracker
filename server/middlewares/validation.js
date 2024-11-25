@@ -83,7 +83,7 @@ export const validateId = (id) => {
 // Add Credits Schema
 const addCreditSchema = z.object({
   year: z.string(),
-  annualCredit: z.number().max(10),
+  annualCredit: z.number().max(20),
   healthCredit: z.number().max(10),
   studyCredit: z.number().max(10),
   familyCredit: z.number().max(10),
@@ -124,4 +124,31 @@ const editLeaveSchema = z.object({
 
 export const validateEditLeave = (data) => {
   return validateWithZodSchema(editLeaveSchema, data);
+};
+
+// Edit Balance Schema
+const editBalanceSchema = z.object({
+  annualCredit: z.number().max(20),
+  annualUsed: z.number().max(20),
+  annualAvailable: z.number().max(20),
+  familyCredit: z.number().max(10),
+  familyUsed: z.number().max(10),
+  familyAvailable: z.number().max(10),
+  healthCredit: z.number().max(10),
+  healthUsed: z.number().max(10),
+  healthAvailable: z.number().max(10),
+  maternityCredit: z.number().max(10),
+  maternityUsed: z.number().max(10),
+  maternityAvailable: z.number().max(10),
+  paternityCredit: z.number().max(10),
+  paternityUsed: z.number().max(10),
+  paternityAvailable: z.number().max(10),
+  studyCredit: z.number().max(10),
+  studyUsed: z.number().max(10),
+  studyAvailable: z.number().max(10),
+  unpaidUsed: z.number(),
+});
+
+export const validateEditBalance = (data) => {
+  return validateWithZodSchema(editBalanceSchema, data);
 };

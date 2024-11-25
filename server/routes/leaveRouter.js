@@ -5,6 +5,7 @@ import {
   getAllBalances,
   getAllLeaves,
   getUserBalances,
+  updateBalance,
   updateLeave,
 } from '../controllers/leaveController.js';
 import {
@@ -42,6 +43,13 @@ router.patch(
   authenticateUser,
   authorizePermissions('admin'),
   updateLeave
+);
+
+router.patch(
+  '/balances/:id',
+  authenticateUser,
+  authorizePermissions('admin'),
+  updateBalance
 );
 
 export default router;
