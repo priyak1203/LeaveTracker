@@ -163,3 +163,8 @@ export const updateLeave = async (req, res) => {
 
   res.status(StatusCodes.OK).json({ msg: 'Leave Updated' });
 };
+
+export const getAllBalances = async (req, res) => {
+  const balances = await Balances.find();
+  res.status(StatusCodes.OK).json({ balances });
+};

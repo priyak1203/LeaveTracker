@@ -13,6 +13,7 @@ import { History, Portal, PortalLayout } from './pages/portalPages';
 
 import { loader as userLoader } from './components/dashboard/UsersTable';
 import { loader as leavesLoader } from './components/dashboard/LeavesTable';
+import { loader as balancesLoader } from './components/dashboard/BalancesTable';
 import { loader as portalLoader } from './pages/portalPages/Portal';
 
 import ProtectedRoute from './pages/ProtectedRoute';
@@ -34,7 +35,7 @@ const router = createBrowserRouter([
         ),
         children: [
           { index: true, element: <Dashboard /> },
-          { path: 'balances', element: <Balances /> },
+          { path: 'balances', element: <Balances />, loader: balancesLoader },
           { path: 'leaves', element: <Leaves />, loader: leavesLoader },
           { path: 'settings', element: <Settings /> },
           { path: 'users', element: <Users />, loader: userLoader },

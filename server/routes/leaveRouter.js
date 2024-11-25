@@ -2,6 +2,7 @@ import { Router } from 'express';
 import {
   addLeaveCredits,
   applyforLeave,
+  getAllBalances,
   getAllLeaves,
   getUserBalances,
   updateLeave,
@@ -27,6 +28,13 @@ router.get(
   authenticateUser,
   authorizePermissions('admin'),
   getAllLeaves
+);
+
+router.get(
+  '/all-balances',
+  authenticateUser,
+  authorizePermissions('admin'),
+  getAllBalances
 );
 
 router.patch(

@@ -9,8 +9,16 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import TableWrapper from '@/components/globals/TableWrapper';
-import { balancesData } from '@/utils/mockData';
 import { Badge } from '@/components/ui/badge';
+import customFetch from '@/utils/axios';
+import { useLoaderData } from 'react-router-dom';
+import { UserBalancesType } from '@/utils/types';
+
+export const loader = async () => {
+  const { data } = await customFetch.get(`/leave/all-balances`);
+  const allBalances: UserBalancesType[] = data.balances;
+  return allBalances;
+};
 
 type BalanceRowTypes = {
   title: string;
@@ -32,6 +40,8 @@ const BalanceRowHead = ({ title, values }: BalanceRowTypes) => {
 };
 
 function BalancesTable() {
+  const allBalances = useLoaderData() as UserBalancesType[];
+
   const balanceCategories = [
     { title: 'ANNUAL', values: ['Credit', 'Used', 'Available'] },
     { title: 'FAMILY', values: ['Credit', 'Used', 'Available'] },
@@ -84,12 +94,12 @@ function BalancesTable() {
           </TableRow>
         </TableHeader>
         <TableBody className="whitespace-nowrap text-center">
-          {balancesData.map((balance) => (
-            <TableRow key={balance.id}>
+          {allBalances.map((balance) => (
+            <TableRow key={balance._id}>
               <TableCell>
                 <IoPencil />
               </TableCell>
-              <TableCell>{balance.name}</TableCell>
+              <TableCell className="capitalize">{balance.userName}</TableCell>
               <TableCell>
                 <Badge>{balance.year}</Badge>
               </TableCell>
