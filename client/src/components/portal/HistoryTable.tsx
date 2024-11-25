@@ -59,9 +59,9 @@ function HistoryTable() {
               <TableCell>
                 <Badge
                   className={`
-                    ${status === 'APPROVED' && 'bg-green-500'} 
+                    ${status === 'APPROVED' && 'bg-green-700'} 
                     ${status === 'PENDING' && 'bg-amber-500'}
-                    ${status === 'REJECTED' && 'bg-red-500'}
+                    ${status === 'REJECTED' && 'bg-red-700'}
                     ${status === 'INMODERATION' && 'bg-indigo-500'}
                     `}
                 >

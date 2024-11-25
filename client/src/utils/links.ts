@@ -14,6 +14,7 @@ export const adminLinks = [
   { title: 'Leaves', url: '/dashboard/leaves', icon: TbListCheck },
   { title: 'Users', url: '/dashboard/users', icon: HiOutlineUserGroup },
   { title: 'Settings', url: '/dashboard/settings', icon: HiOutlineCog6Tooth },
+  { title: 'History', url: '/portal/history', icon: TbListCheck },
 ];
 
 export const moderatorLinks = [
@@ -23,6 +24,7 @@ export const moderatorLinks = [
   { title: 'Leaves', url: '/dashboard/leaves', icon: TbListCheck },
   { title: 'Users', url: '/dashboard/users', icon: HiOutlineUserGroup },
   { title: 'Settings', url: '/dashboard/settings', icon: HiOutlineCog6Tooth },
+  { title: 'History', url: '/portal/history', icon: TbListCheck },
 ];
 
 export const userLinks = [

@@ -82,8 +82,18 @@ function LeavesTable() {
                 <span>{dayjs(endDate).format('DD/MM/YYYY')}</span>
               </TableCell>
               <TableCell>{days}</TableCell>
-              <TableCell className="capitalize">
-                <Badge>{leaveStatus}</Badge>
+              <TableCell className="uppercase">
+                <Badge
+                  className={`
+                    ${leaveStatus === 'approved' && 'bg-green-700'} 
+                    ${leaveStatus === 'pending' && 'bg-amber-500'}
+                    ${leaveStatus === 'inmoderation' && 'bg-indigo-500'}
+                    ${leaveStatus === 'rejected' && 'bg-red-700'}
+                    
+                    `}
+                >
+                  {leaveStatus}
+                </Badge>
               </TableCell>
               <TableCell>{userNotes}</TableCell>
               <TableCell>
