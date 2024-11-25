@@ -11,8 +11,8 @@ import { RenderNavLinks } from './NavLinks';
 
 import LogoutBtn from './LogoutBtn';
 import ToggleTheme from './ToggleTheme';
-import { Link } from 'react-router-dom';
 import { AppContextType, useAppContext } from '@/context/appContext';
+import Logo from './Logo';
 
 function BigSidebar() {
   const { user } = useAppContext() as AppContextType;
@@ -28,11 +28,9 @@ function BigSidebar() {
       <SheetContent side="left" className="w-56 flex flex-col justify-between">
         <div>
           <SheetTitle>
-            <Link to="/" className="flex mt-3 mb-3 justify-center ">
-              <span className="w-10 h-10 p-2 flex items-center justify-center bg-purple-700 text-white rounded-full">
-                LT
-              </span>
-            </Link>
+            <div className="flex mt-3 mb-3 justify-center">
+              <Logo />
+            </div>
           </SheetTitle>
           <SheetDescription></SheetDescription>
           <nav className="flex flex-col items-center px-3 py-4 overflow-y-auto">

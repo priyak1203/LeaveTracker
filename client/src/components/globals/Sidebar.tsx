@@ -1,8 +1,8 @@
 import { RenderNavLinks } from './NavLinks';
 import LogoutBtn from './LogoutBtn';
 import ToggleTheme from './ToggleTheme';
-import { Link } from 'react-router-dom';
 import { AppContextType, useAppContext } from '@/context/appContext';
+import Logo from './Logo';
 
 function Sidebar() {
   const { user } = useAppContext() as AppContextType;
@@ -13,11 +13,9 @@ function Sidebar() {
       <div className="flex flex-col justify-between items-center h-full">
         {/* TOP PART */}
         <div>
-          <Link to="/" className="mt-8 flex justify-center items-center">
-            <span className="w-10 h-10 p-2 flex items-center justify-center bg-purple-700 text-white rounded-full">
-              LT
-            </span>
-          </Link>
+          <div className="mt-8 flex justify-center items-center">
+            <Logo />
+          </div>
           <nav className="flex flex-col px-3 py-4 overflow-y-auto">
             <RenderNavLinks userRole={user?.role} renderStyle={renderStyle} />
           </nav>
