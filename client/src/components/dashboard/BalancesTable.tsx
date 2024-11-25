@@ -96,7 +96,7 @@ function BalancesTable() {
           {allBalances.map((balance) => (
             <TableRow key={balance._id}>
               <TableCell>
-                <EditBalances />
+                <EditBalances balance={balance} />
               </TableCell>
               <TableCell className="capitalize">{balance.userName}</TableCell>
               <TableCell>
