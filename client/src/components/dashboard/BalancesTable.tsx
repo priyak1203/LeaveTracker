@@ -1,5 +1,3 @@
-import { IoPencil } from 'react-icons/io5';
-
 import {
   Table,
   TableBody,
@@ -13,6 +11,7 @@ import { Badge } from '@/components/ui/badge';
 import customFetch from '@/utils/axios';
 import { useLoaderData } from 'react-router-dom';
 import { UserBalancesType } from '@/utils/types';
+import EditBalances from './EditBalances';
 
 export const loader = async () => {
   const { data } = await customFetch.get(`/leave/all-balances`);
@@ -97,7 +96,7 @@ function BalancesTable() {
           {allBalances.map((balance) => (
             <TableRow key={balance._id}>
               <TableCell>
-                <IoPencil />
+                <EditBalances />
               </TableCell>
               <TableCell className="capitalize">{balance.userName}</TableCell>
               <TableCell>
