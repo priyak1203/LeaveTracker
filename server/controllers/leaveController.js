@@ -6,9 +6,11 @@ import {
   validateId,
   validateUserLeaveInput,
 } from '../middlewares/validation.js';
-import { differenceInDays } from 'date-fns';
+import { differenceInDays, parseISO } from 'date-fns';
 import Balances from '../models/balancesModel.js';
 import Leave from '../models/leaveModel.js';
+import Event from '../models/eventModel.js';
+
 import { StatusCodes } from 'http-status-codes';
 
 export const applyforLeave = async (req, res) => {
@@ -122,6 +124,8 @@ export const updateLeave = async (req, res) => {
     leaveType,
     days,
     userId,
+    userName,
+    startDate,
     year,
     notes,
     moderatorName,
@@ -146,6 +150,15 @@ export const updateLeave = async (req, res) => {
     balance[`${leaveType}Available`] = balance[`${leaveType}Available`] - days;
     balance[`${leaveType}Used`] = days;
     await balance.save();
+
+    // Create an event
+    const title = `${userName} on Leave`;
+    const description = `For ${days} days`;
+    await Event.create({
+      title,
+      description,
+      startDate,
+    });
   }
 
   // Update leave

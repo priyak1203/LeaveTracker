@@ -116,7 +116,7 @@ const editLeaveSchema = z.object({
   year: z.string(),
   userId: z.string(),
   userEmail: z.string(),
-  userName: z.string().optional(),
+  userName: z.string(),
   startDate: z.string(),
   moderatorId: z.string(),
   moderatorName: z.string(),
