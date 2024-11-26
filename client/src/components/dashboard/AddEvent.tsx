@@ -22,6 +22,8 @@ import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import customFetch from '@/utils/axios';
+import toast from 'react-hot-toast';
 
 const EventSchema = z.object({
   title: z.string({ required_error: 'Please provide a title' }).max(30),
@@ -40,9 +42,19 @@ function AddEvent() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof EventSchema>) {
-    console.log('form submitted');
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof EventSchema>) {
+    try {
+      const formattedValues = {
+        ...values,
+        startDate: values.startDate.toISOString(),
+      };
+      const { data } = await customFetch.post(`/event/create`, formattedValues);
+      toast.success(data.msg);
+      form.reset();
+    } catch (error: any) {
+      const errMsg = error?.response?.data?.msg || `Something went wrong`;
+      toast.error(errMsg);
+    }
   }
 
   return (

@@ -152,3 +152,14 @@ const editBalanceSchema = z.object({
 export const validateEditBalance = (data) => {
   return validateWithZodSchema(editBalanceSchema, data);
 };
+
+// Add Event Schema
+const addEventSchema = z.object({
+  title: z.string({ message: 'title is required' }).max(30),
+  description: z.string({ message: 'description is required' }).max(500),
+  startDate: z.date({ required_error: 'start date is required' }),
+});
+
+export const validateAddEvent = (data) => {
+  return validateWithZodSchema(addEventSchema, data);
+};
