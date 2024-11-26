@@ -20,18 +20,29 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+
+const EventSchema = z.object({
+  title: z.string({ required_error: 'Please provide a title' }).max(30),
+  description: z
+    .string({ required_error: 'Please add a description' })
+    .max(500),
+  startDate: z.date({ required_error: 'A start date is required' }),
+});
 
 function AddEvent() {
-  const form = useForm({
+  const form = useForm<z.infer<typeof EventSchema>>({
+    resolver: zodResolver(EventSchema),
     defaultValues: {
       title: '',
       description: '',
-      startDate: '',
     },
   });
 
-  function onSubmit() {
+  function onSubmit(values: z.infer<typeof EventSchema>) {
     console.log('form submitted');
+    console.log(values);
   }
 
   return (
