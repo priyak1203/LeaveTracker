@@ -12,6 +12,7 @@ const app = express();
 import userRouter from './routes/userRouter.js';
 import authRouter from './routes/authRouter.js';
 import leaveRouter from './routes/leaveRouter.js';
+import eventRouter from './routes/eventRouter.js';
 
 // error handlers
 import errorHandler from './middlewares/errorHandler.js';
@@ -29,6 +30,7 @@ app.get('/', (req, res) => {
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/leave', leaveRouter);
+app.use('/api/v1/event', eventRouter);
 
 // Error handler middleware
 app.use(errorHandler);
