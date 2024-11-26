@@ -5,6 +5,7 @@ import {
   getAllBalances,
   getAllLeaves,
   getUserBalances,
+  getUserLeaves,
   updateBalance,
   updateLeave,
 } from '../controllers/leaveController.js';
@@ -23,14 +24,15 @@ router.post(
   addLeaveCredits
 );
 
+router.get('/user-leaves', authenticateUser, getUserLeaves);
 router.get('/user-balance', authenticateUser, getUserBalances);
+
 router.get(
   '/all-leaves',
   authenticateUser,
   authorizePermissions('admin'),
   getAllLeaves
 );
-
 router.get(
   '/all-balances',
   authenticateUser,

@@ -16,6 +16,8 @@ import { loader as leavesLoader } from './components/dashboard/LeavesTable';
 import { loader as balancesLoader } from './components/dashboard/BalancesTable';
 import { loader as settingsLoader } from './pages/dashboardPages/Settings';
 import { loader as portalLoader } from './pages/portalPages/Portal';
+import { loader as historyLoader } from './pages/portalPages/History';
+
 import ProtectedRoute from './pages/ProtectedRoute';
 
 const router = createBrowserRouter([
@@ -50,7 +52,7 @@ const router = createBrowserRouter([
         ),
         children: [
           { index: true, element: <Portal />, loader: portalLoader },
-          { path: 'history', element: <History /> },
+          { path: 'history', element: <History />, loader: historyLoader },
         ],
       },
     ],

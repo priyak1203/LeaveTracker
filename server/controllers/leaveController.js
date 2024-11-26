@@ -199,3 +199,9 @@ export const updateBalance = async (req, res) => {
 
   res.status(StatusCodes.OK).json({ msg: 'Balance updated successfully' });
 };
+
+export const getUserLeaves = async (req, res) => {
+  const { userId } = req.user;
+  const userLeaves = await Leave.find({ user: userId });
+  res.status(StatusCodes.OK).json({ userLeaves });
+};

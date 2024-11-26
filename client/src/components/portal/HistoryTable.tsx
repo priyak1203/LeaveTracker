@@ -6,12 +6,17 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { leaveHistory } from '@/utils/mockData';
 import dayjs from 'dayjs';
 import { Badge } from '../ui/badge';
-import { formatDistance, subDays } from 'date-fns';
+import { formatDistance, parseISO, subDays } from 'date-fns';
+import { UserLeavesType } from '@/utils/types';
+import { getBadgeClass } from '@/utils/getStyles';
 
-function HistoryTable() {
+type HistoryPropsType = {
+  leaves: UserLeavesType[];
+};
+
+function HistoryTable({ leaves }: HistoryPropsType) {
   const tableHeadData = [
     'Type',
     'Requested On',
@@ -19,7 +24,7 @@ function HistoryTable() {
     'Days',
     'Status',
     'Updated At',
-    'Update Notes',
+    'Updated Notes',
     'Updated By',
   ];
 
@@ -33,21 +38,25 @@ function HistoryTable() {
         </TableRow>
       </TableHeader>
       <TableBody className="whitespace-nowrap">
-        {leaveHistory.map((history) => {
+        {leaves.map((history) => {
           const {
-            id,
-            type,
+            _id: id,
+            leaveType,
             createdAt,
             days,
             startDate,
             endDate,
-            status,
-            notes,
-            updatedBy,
+            updatedAt,
+            leaveStatus,
+            moderatorName,
+            moderatorNotes,
           } = history;
+
+          const updated = parseISO(updatedAt as string);
+
           return (
             <TableRow key={id}>
-              <TableCell>{type}</TableCell>
+              <TableCell className="capitalize">{leaveType}</TableCell>
               <TableCell>
                 {dayjs(createdAt).format('DD/MM/YYYY HH:MM')}
               </TableCell>
@@ -56,25 +65,18 @@ function HistoryTable() {
                 <span>{dayjs(endDate).format('DD/MM/YYYY')}</span>
               </TableCell>
               <TableCell>{days}</TableCell>
-              <TableCell>
-                <Badge
-                  className={`
-                    ${status === 'APPROVED' && 'bg-green-700'} 
-                    ${status === 'PENDING' && 'bg-amber-500'}
-                    ${status === 'REJECTED' && 'bg-red-700'}
-                    ${status === 'INMODERATION' && 'bg-indigo-500'}
-                    `}
-                >
-                  {status}
+              <TableCell className="uppercase">
+                <Badge className={getBadgeClass(leaveStatus as string)}>
+                  {leaveStatus}
                 </Badge>
               </TableCell>
               <TableCell>
-                {formatDistance(subDays(new Date(createdAt), 0), new Date(), {
+                {formatDistance(subDays(new Date(updated), 0), new Date(), {
                   addSuffix: true,
                 })}
               </TableCell>
-              <TableCell>{notes}</TableCell>
-              <TableCell>{updatedBy}</TableCell>
+              <TableCell>{moderatorNotes}</TableCell>
+              <TableCell>{moderatorName}</TableCell>
             </TableRow>
           );
         })}

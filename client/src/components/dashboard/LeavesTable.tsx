@@ -13,6 +13,7 @@ import { useLoaderData } from 'react-router-dom';
 import { Badge } from '../ui/badge';
 import { formatDistance, parseISO, subDays } from 'date-fns';
 import EditLeave from './EditLeave';
+import { getBadgeClass } from '@/utils/getStyles';
 
 export const loader = async () => {
   const { data } = await customFetch.get('/leave/all-leaves');
@@ -83,15 +84,7 @@ function LeavesTable() {
               </TableCell>
               <TableCell>{days}</TableCell>
               <TableCell className="uppercase">
-                <Badge
-                  className={`
-                    ${leaveStatus === 'approved' && 'bg-green-700'} 
-                    ${leaveStatus === 'pending' && 'bg-amber-500'}
-                    ${leaveStatus === 'inmoderation' && 'bg-indigo-500'}
-                    ${leaveStatus === 'rejected' && 'bg-red-700'}
-                    
-                    `}
-                >
+                <Badge className={getBadgeClass(leaveStatus as string)}>
                   {leaveStatus}
                 </Badge>
               </TableCell>
