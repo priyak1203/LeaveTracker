@@ -10,5 +10,10 @@ export const createEvent = async (req, res) => {
 
   // create an event
   await Event.create(validData);
-  res.status(StatusCodes.OK).json({ msg: 'Event added.' });
+  res.status(StatusCodes.CREATED).json({ msg: 'Event added.' });
+};
+
+export const getAllEvents = async (req, res) => {
+  const events = await Event.find();
+  res.status(StatusCodes.OK).json({ events });
 };

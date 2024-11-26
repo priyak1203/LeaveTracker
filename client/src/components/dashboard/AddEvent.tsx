@@ -24,6 +24,7 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import customFetch from '@/utils/axios';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const EventSchema = z.object({
   title: z.string({ required_error: 'Please provide a title' }).max(30),
@@ -41,6 +42,7 @@ function AddEvent() {
       description: '',
     },
   });
+  const navigate = useNavigate();
 
   async function onSubmit(values: z.infer<typeof EventSchema>) {
     try {
@@ -51,6 +53,7 @@ function AddEvent() {
       const { data } = await customFetch.post(`/event/create`, formattedValues);
       toast.success(data.msg);
       form.reset();
+      navigate('/dashboard/settings');
     } catch (error: any) {
       const errMsg = error?.response?.data?.msg || `Something went wrong`;
       toast.error(errMsg);

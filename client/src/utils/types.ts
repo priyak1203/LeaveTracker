@@ -57,3 +57,11 @@ export type UserLeavesType = {
   createdAt?: string;
   updatedAt?: string;
 };
+
+export type UserEventType = {
+  _id: string;
+  title: string;
+  description: string;
+  startDate: string;
+  endDate?: string;
+};

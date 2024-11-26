@@ -3,7 +3,7 @@ import {
   authenticateUser,
   authorizePermissions,
 } from '../middlewares/authentication.js';
-import { createEvent } from '../controllers/eventController.js';
+import { createEvent, getAllEvents } from '../controllers/eventController.js';
 
 const router = Router();
 
@@ -13,5 +13,7 @@ router.post(
   authorizePermissions('admin'),
   createEvent
 );
+
+router.get('/all-events', authenticateUser, getAllEvents);
 
 export default router;
