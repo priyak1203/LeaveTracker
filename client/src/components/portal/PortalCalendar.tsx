@@ -4,8 +4,14 @@ import { IoMdArrowDropleft, IoMdArrowDropright } from 'react-icons/io';
 import Container from '@/components/globals/Container';
 import { months, daysOfTheWeek, getDays } from '@/utils/getDays';
 import { cn } from '@/lib/utils';
+import { UserEventType } from '@/utils/types';
+import EventPopover from './EventPopover';
 
-function PortalCalendar() {
+type PortalCalenderPropType = {
+  events: UserEventType[];
+};
+
+function PortalCalendar({ events }: PortalCalenderPropType) {
   const currentDate = dayjs();
   const [today, setToday] = useState(currentDate);
 
@@ -48,17 +54,25 @@ function PortalCalendar() {
         <div className="grid grid-cols-7">
           {getDays(today.month(), today.year()).map((item, index) => {
             const { date, currentMonth, today } = item;
+            const event = events.find((event) =>
+              dayjs(event.startDate).isSame(date, 'day')
+            );
+
             return (
               <div key={index} className="h-10  grid place-content-center ">
-                <h2
-                  className={cn(
-                    !currentMonth && 'text-slate-400',
-                    today && 'bg-purple-600 text-white',
-                    'h-8 w-8 grid place-content-center rounded-lg cursor-pointer hover:bg-purple-800 hover:text-white dark:hover:bg-slate-500'
-                  )}
-                >
-                  {date.date()}
-                </h2>
+                {!event ? (
+                  <h2
+                    className={cn(
+                      !currentMonth && 'text-slate-400',
+                      today && 'bg-purple-600 text-white',
+                      'h-8 w-8 grid place-content-center rounded-lg cursor-pointer hover:bg-purple-800 hover:text-white dark:hover:bg-slate-500'
+                    )}
+                  >
+                    {date.date()}
+                  </h2>
+                ) : (
+                  <EventPopover event={event} date={date.date()} />
+                )}
               </div>
             );
           })}
