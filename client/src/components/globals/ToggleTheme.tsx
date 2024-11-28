@@ -1,14 +1,17 @@
+import { AppContextType, useAppContext } from '@/context/appContext';
 import { HiOutlineSun } from 'react-icons/hi2';
 import { MdOutlineNightlightRound } from 'react-icons/md';
 
 function ToggleTheme() {
-  // temp
+  const { isDarkTheme, toggleDarkTheme } = useAppContext() as AppContextType;
 
-  const currentTheme = 'dark';
   return (
     <>
-      <button className="bg-purple-700 p-1 rounded-full text-white dark:bg-slate-600 ">
-        {currentTheme === 'dark' ? (
+      <button
+        className="bg-purple-700 p-1 rounded-full text-white dark:bg-slate-600"
+        onClick={toggleDarkTheme}
+      >
+        {isDarkTheme ? (
           <HiOutlineSun size={24} />
         ) : (
           <MdOutlineNightlightRound size={22} />
