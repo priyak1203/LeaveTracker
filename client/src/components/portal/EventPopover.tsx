@@ -21,8 +21,8 @@ function EventPopover({ date, event }: EventPopOverPropType) {
           <NavigationMenuTrigger>
             <h2
               className={cn(
-                'bg-purple-200 text-slate-600 border',
-                'h-8 w-8 grid place-content-center rounded-lg cursor-pointer hover:bg-purple-800 hover:text-white dark:hover:bg-slate-500'
+                'bg-picton-blue-600 border',
+                'h-8 w-8 grid place-content-center rounded-lg cursor-pointer hover:bg-primary hover:text-primary-foreground dark:hover:bg-picton-blue-300 dark:hover:text-primary'
               )}
             >
               {date}

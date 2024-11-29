@@ -18,7 +18,7 @@ function PortalCalendar({ events }: PortalCalenderPropType) {
   return (
     <Container>
       {/* HEADER */}
-      <div className="flex flex-col sm:flex-row justify-between items-center bg-purple-200 py-5 px-10 rounded-t-md dark:bg-slate-800">
+      <div className="flex flex-col sm:flex-row justify-between items-center py-5 px-10 rounded-t-md bg-primary text-primary-foreground">
         <h2 className="select-none font-semibold">
           {months[today.month()]}, {today.year()}
         </h2>
@@ -40,7 +40,7 @@ function PortalCalendar({ events }: PortalCalenderPropType) {
         </div>
       </div>
       {/* DAYS OF THE MONTH */}
-      <section className="bg-white py-2 rounded-b-md dark:border dark:bg-slate-700">
+      <section className="py-2 rounded-b-md border bg-primary-foreground dark:bg-secondary dark:border-t-0">
         <div className="grid grid-cols-7">
           {daysOfTheWeek.map((day, index) => (
             <h2
@@ -64,8 +64,9 @@ function PortalCalendar({ events }: PortalCalenderPropType) {
                   <h2
                     className={cn(
                       !currentMonth && 'text-slate-400',
-                      today && 'bg-purple-600 text-white',
-                      'h-8 w-8 grid place-content-center rounded-lg cursor-pointer hover:bg-purple-800 hover:text-white dark:hover:bg-slate-500'
+                      'h-8 w-8 grid place-content-center rounded-lg cursor-pointer hover:bg-primary hover:text-primary-foreground dark:hover:bg-primary-foreground dark:hover:text-primary',
+                      today &&
+                        'bg-primary text-primary-foreground hover:bg-picton-blue-400 dark:hover:bg-picton-blue-400 dark:hover:text-primary-foreground'
                     )}
                   >
                     {date.date()}

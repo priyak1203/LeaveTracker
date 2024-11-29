@@ -5,7 +5,7 @@ import { Outlet } from 'react-router-dom';
 function PortalLayout() {
   return (
     <>
-      <div className="min-h-screen bg-slate-100 dark:bg-black">
+      <div className="min-h-screen">
         <Sidebar />
         <div className="sm:ml-[6rem]">
           <Header />

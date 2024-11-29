@@ -10,9 +10,9 @@ type LeaveCardProps = {
 
 function LeaveCard({ year, leaveType, credit, used, balance }: LeaveCardProps) {
   return (
-    <Card>
+    <Card className="bg-primary-foreground dark:bg-secondary">
       <CardContent className="flex flex-col p-3 space-y-2">
-        <div className="flex items-center justify-between py-1 px-2 bg-purple-200 rounded-md font-semibold dark:bg-slate-800">
+        <div className="flex items-center justify-between py-1 px-2 rounded-md font-semibold bg-primary text-secondary dark:bg-primary-foreground dark:text-primary">
           <h4>{year}</h4>
           <h4 className="uppercase">{leaveType}</h4>
         </div>

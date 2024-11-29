@@ -4,7 +4,7 @@ import {
   HiOutlineSquares2X2,
   HiOutlineUserGroup,
 } from 'react-icons/hi2';
-import { MdOutlineBalance } from 'react-icons/md';
+import { MdOutlineBalance, MdOutlineFormatListBulleted } from 'react-icons/md';
 import { TbListCheck } from 'react-icons/tb';
 
 export const adminLinks = [
@@ -14,7 +14,11 @@ export const adminLinks = [
   { title: 'Leaves', url: '/dashboard/leaves', icon: TbListCheck },
   { title: 'Users', url: '/dashboard/users', icon: HiOutlineUserGroup },
   { title: 'Settings', url: '/dashboard/settings', icon: HiOutlineCog6Tooth },
-  { title: 'History', url: '/portal/history', icon: TbListCheck },
+  {
+    title: 'History',
+    url: '/portal/history',
+    icon: MdOutlineFormatListBulleted,
+  },
 ];
 
 export const moderatorLinks = [
@@ -24,7 +28,11 @@ export const moderatorLinks = [
   { title: 'Leaves', url: '/dashboard/leaves', icon: TbListCheck },
   { title: 'Users', url: '/dashboard/users', icon: HiOutlineUserGroup },
   { title: 'Settings', url: '/dashboard/settings', icon: HiOutlineCog6Tooth },
-  { title: 'History', url: '/portal/history', icon: TbListCheck },
+  {
+    title: 'History',
+    url: '/portal/history',
+    icon: MdOutlineFormatListBulleted,
+  },
 ];
 
 export const userLinks = [
