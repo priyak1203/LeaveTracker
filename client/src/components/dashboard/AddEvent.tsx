@@ -61,7 +61,7 @@ function AddEvent() {
   }
 
   return (
-    <div className="p-4 rounded-md shadow-md bg-white dark:bg-black">
+    <div className="p-4 rounded-md shadow-md bg-primary-foreground dark:bg-secondary border">
       <h2 className="text-2xl text-center font-bold tracking-tight">
         Add an Event
       </h2>

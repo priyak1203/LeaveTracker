@@ -69,7 +69,7 @@ function UsersTable() {
               <TableCell className="font-medium">
                 <Avatar>
                   <AvatarImage src={image} alt={name} />
-                  <AvatarFallback className="bg-purple-300 text-slate-800 dark:bg-purple-800 dark:text-white">
+                  <AvatarFallback className="bg-primary text-primary-foreground">
                     {name?.charAt(0).toUpperCase()}
                   </AvatarFallback>
                 </Avatar>

@@ -16,7 +16,7 @@ function SettingsPage() {
 
   return (
     <Container>
-      <div className="my-4 py-6 bg-white dark:bg-black">
+      <div className="my-4 py-6 bg-primary-foreground dark:bg-secondary rounded-md">
         <h2 className="text-xl text-center font-extrabold leading-tight lg:text-2xl">
           Event Settings
         </h2>

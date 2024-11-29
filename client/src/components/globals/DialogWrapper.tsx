@@ -39,13 +39,13 @@ function DialogWrapper({
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         {isBtn ? (
-          <Button className="text-white" size={btnSize}>
+          <Button className="text-primary-foreground" size={btnSize}>
             {btnTitle}
           </Button>
         ) : (
           Icon && (
             <span>
-              <Icon className="text-purple-600 cursor-pointer h-5 w-5 mx-auto" />
+              <Icon className="text-primary dark:text-primary-foreground cursor-pointer h-5 w-5 mx-auto" />
             </span>
           )
         )}

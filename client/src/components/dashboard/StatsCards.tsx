@@ -42,7 +42,10 @@ function StatsCards() {
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
       {statsCardsData.map((stat) => {
         return (
-          <Card key={stat.key}>
+          <Card
+            key={stat.key}
+            className="bg-primary-foreground dark:bg-secondary"
+          >
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
                 {stat.title}
