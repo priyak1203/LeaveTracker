@@ -21,7 +21,7 @@ function BigSidebar() {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <button className="p-2 bg-purple-100 rounded-full text-purple-500">
+        <button className="p-2 rounded-full bg-secondary text-primary dark:bg-primary dark:text-secondary-foreground">
           <TiThMenu size={24} />
         </button>
       </SheetTrigger>

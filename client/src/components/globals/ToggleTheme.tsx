@@ -8,7 +8,7 @@ function ToggleTheme() {
   return (
     <>
       <button
-        className="bg-purple-700 p-1 rounded-full text-white dark:bg-slate-600"
+        className="p-1 rounded-full bg-primary text-primary-foreground dark:bg-secondary-foreground dark:text-primary "
         onClick={toggleDarkTheme}
       >
         {isDarkTheme ? (

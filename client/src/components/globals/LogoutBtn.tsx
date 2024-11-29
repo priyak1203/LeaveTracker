@@ -6,7 +6,7 @@ function LogoutBtn() {
 
   return (
     <button
-      className="bg-purple-700  text-white p-1 rounded-full dark:bg-slate-600"
+      className="p-1 rounded-full bg-primary text-primary-foreground dark:bg-secondary-foreground dark:text-primary"
       onClick={() => logout()}
     >
       <TbLogout2 size={24} />

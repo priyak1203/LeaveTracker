@@ -20,7 +20,7 @@ function Header() {
 
   return (
     <Container>
-      <header className="bg-white rounded-md shadow-sm dark:bg-black dark:border-b z-10">
+      <header className="rounded-md shadow-sm z-10 bg-primary-foreground dark:bg-secondary border-b">
         <nav className="p-4 transition-all">
           <div className="mx-4 flex justify-between items-center flex-wrap">
             {/* LEFT SIDE */}
@@ -30,18 +30,18 @@ function Header() {
 
             {/* RIGHT SIDE */}
             <div className="flex items-center space-x-3 md:space-x-6">
-              <button className="p-2 rounded-full bg-purple-100 text-purple-500">
+              <button className="p-2 rounded-full bg-secondary text-primary dark:bg-primary dark:text-secondary-foreground">
                 <PiBellRingingDuotone size={24} />
               </button>
               <Avatar>
                 <AvatarImage />
-                <AvatarFallback>
+                <AvatarFallback className="bg-primary text-primary-foreground">
                   {user?.name.charAt(0).toUpperCase() || 'UR'}
                 </AvatarFallback>
               </Avatar>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <button className="text-slate-500 dark:text-slate-300">
+                  <button className="text-primary dark:text-secondary-foreground">
                     <BiSolidChevronDown size={20} />
                   </button>
                 </DropdownMenuTrigger>
@@ -49,10 +49,10 @@ function Header() {
                   <DropdownMenuLabel className="capitalize">
                     {user?.name}
                   </DropdownMenuLabel>
-                  <DropdownMenuSeparator />
+                  <DropdownMenuSeparator className="bg-primary dark:bg-muted" />
                   <DropdownMenuItem>Profile</DropdownMenuItem>
                   <DropdownMenuItem>Support</DropdownMenuItem>
-                  <DropdownMenuSeparator />
+                  <DropdownMenuSeparator className="bg-primary dark:bg-muted" />
                   <div className="flex flex-col items-start space-y-4 m-2">
                     <ToggleTheme />
                     <LogoutBtn />

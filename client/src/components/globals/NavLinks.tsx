@@ -20,7 +20,7 @@ const RenderIconsLinks = ({ links }: LinkPropsType) => {
           <TooltipProvider delayDuration={100}>
             <Tooltip>
               <TooltipTrigger asChild>
-                <button className="bg-slate-50 p-2 text-slate-500 rounded-md dark:bg-black">
+                <button className="p-2 rounded-md text-primary dark:text-primary-foreground">
                   {createElement(link.icon, { size: 24 })}
                 </button>
               </TooltipTrigger>
@@ -41,7 +41,7 @@ const RenderLinks = ({ links }: LinkPropsType) => {
       {links.map((link, index) => {
         return (
           <NavLink to={link.url} key={index} className="my-2">
-            <span className="flex items-center justify-between">
+            <span className="flex items-center justify-between text-primary dark:text-primary-foreground">
               <span className="px-3">
                 {createElement(link.icon, { size: 24 })}
               </span>

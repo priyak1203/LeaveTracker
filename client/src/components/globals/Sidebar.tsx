@@ -9,7 +9,7 @@ function Sidebar() {
   const renderStyle = 'ICON';
 
   return (
-    <div className="hidden sm:block fixed inset-y-0 left-0 w-[5rem] bg-white rounded-lg overflow-hidden dark:bg-black dark:border-r">
+    <div className="hidden sm:block fixed inset-y-0 left-0 w-[5rem] rounded-lg overflow-hidden border-r bg-primary-foreground dark:bg-secondary">
       <div className="flex flex-col justify-between items-center h-full">
         {/* TOP PART */}
         <div>
