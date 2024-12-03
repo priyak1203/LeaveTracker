@@ -1,4 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import Logo from './Logo';
 
 type FormCardPropsType = {
   title?: string;
@@ -10,10 +11,14 @@ function FormCardWrapper({
   children,
 }: FormCardPropsType) {
   return (
-    <div className="bg-slate-200 min-h-screen p-10 dark:bg-slate-800">
-      <Card className="w-[500px] mx-auto  p-4 ">
+    <div className="min-h-screen flex items-center ">
+      <Card className="w-[500px] mx-auto  p-2 ">
         <CardHeader className="text-center">
           <CardTitle className="tracking-wide font-bold text-2xl">
+            <div className="flex justify-center py-1 mb-1">
+              <Logo />
+            </div>
+
             {title}
           </CardTitle>
         </CardHeader>

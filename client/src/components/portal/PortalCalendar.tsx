@@ -72,7 +72,11 @@ function PortalCalendar({ events }: PortalCalenderPropType) {
                     {date.date()}
                   </h2>
                 ) : (
-                  <EventPopover event={event} date={date.date()} />
+                  <EventPopover
+                    event={event}
+                    date={date.date()}
+                    today={today as boolean}
+                  />
                 )}
               </div>
             );

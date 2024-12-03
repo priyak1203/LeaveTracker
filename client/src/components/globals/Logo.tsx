@@ -1,8 +1,8 @@
 function Logo() {
   return (
-    <span className="w-10 h-10 p-2 flex items-center justify-center bg-primary text-primary-foreground rounded-full">
-      LT
-    </span>
+    <div className="w-12 h-12 p-2 flex items-center justify-center bg-primary text-primary-foreground rounded-full">
+      <span className="font-bold tracking-wider">LT</span>
+    </div>
   );
 }
 

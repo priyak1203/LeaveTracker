@@ -11,9 +11,10 @@ import { UserEventType } from '@/utils/types';
 type EventPopOverPropType = {
   date: number;
   event: UserEventType;
+  today: boolean;
 };
 
-function EventPopover({ date, event }: EventPopOverPropType) {
+function EventPopover({ date, event, today }: EventPopOverPropType) {
   return (
     <NavigationMenu>
       <NavigationMenuList>
@@ -22,7 +23,9 @@ function EventPopover({ date, event }: EventPopOverPropType) {
             <h2
               className={cn(
                 'bg-picton-blue-600 border',
-                'h-8 w-8 grid place-content-center rounded-lg cursor-pointer hover:bg-primary hover:text-primary-foreground dark:hover:bg-picton-blue-300 dark:hover:text-primary'
+                'h-8 w-8 grid place-content-center rounded-lg cursor-pointer hover:bg-primary hover:text-primary-foreground dark:hover:bg-picton-blue-300 dark:hover:text-primary',
+                today &&
+                  'bg-primary text-primary-foreground hover:bg-picton-blue-400 dark:hover:bg-picton-blue-400 dark:hover:text-primary-foreground'
               )}
             >
               {date}

@@ -74,7 +74,7 @@ function UsersTable() {
                   </AvatarFallback>
                 </Avatar>
               </TableCell>
-              <TableCell className="font-medium">{name}</TableCell>
+              <TableCell className="font-medium capitalize">{name}</TableCell>
               <TableCell>{email}</TableCell>
               <TableCell>{phone}</TableCell>
               <TableCell>
