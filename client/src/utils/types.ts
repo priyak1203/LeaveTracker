@@ -10,7 +10,7 @@ export type UserType = {
   image?: string;
 };
 
-export type roleType = 'admin' | 'moderator' | 'user';
+export type RoleType = 'admin' | 'moderator' | 'user';
 
 export type UserBalancesType = {
   _id: string;
@@ -65,3 +65,14 @@ export type UserEventType = {
   startDate: string;
   endDate?: string;
 };
+
+export enum UserRole {
+  ADMIN = 'admin',
+  MODERATOR = 'moderator',
+  USER = 'user',
+}
+
+export enum RenderStyle {
+  ICON = 'ICON',
+  LINKS = 'LINKS',
+}

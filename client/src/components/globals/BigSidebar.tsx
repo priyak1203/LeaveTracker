@@ -13,10 +13,11 @@ import LogoutBtn from './LogoutBtn';
 import ToggleTheme from './ToggleTheme';
 import { AppContextType, useAppContext } from '@/context/appContext';
 import Logo from './Logo';
+import { RenderStyle } from '@/utils/types';
 
 function BigSidebar() {
   const { user } = useAppContext() as AppContextType;
-  const renderStyle = 'LINKS';
+  const renderStyle = RenderStyle.LINKS;
 
   return (
     <Sheet>

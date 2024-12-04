@@ -3,10 +3,11 @@ import LogoutBtn from './LogoutBtn';
 import ToggleTheme from './ToggleTheme';
 import { AppContextType, useAppContext } from '@/context/appContext';
 import Logo from './Logo';
+import { RenderStyle } from '@/utils/types';
 
 function Sidebar() {
   const { user } = useAppContext() as AppContextType;
-  const renderStyle = 'ICON';
+  const renderStyle = RenderStyle.ICON;
 
   return (
     <div className="hidden sm:block fixed inset-y-0 left-0 w-[5rem] rounded-lg overflow-hidden border-r bg-primary-foreground dark:bg-secondary">

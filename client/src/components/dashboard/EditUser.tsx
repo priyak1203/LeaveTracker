@@ -22,7 +22,7 @@ import { useState } from 'react';
 import { z } from 'zod';
 import { departments, titles, userRoles } from '@/utils/sampleData';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { roleType, type UserType } from '@/utils/types';
+import { RoleType, type UserType } from '@/utils/types';
 import customFetch from '@/utils/axios';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
@@ -48,7 +48,7 @@ function EditUser({ user }: EditUserPropsType) {
       phone: user.phone,
       department: user.department,
       jobTitle: user.jobTitle,
-      role: user.role as roleType,
+      role: user.role as RoleType,
     },
   });
 
