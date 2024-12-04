@@ -1,16 +1,14 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
-import { HomeLayout, Landing, Login, Register } from './pages';
+import { AppLayout, HomeLayout, Landing, Login, Register } from './pages';
 import {
   Balances,
   Dashboard,
-  DashboardLayout,
   Leaves,
   Settings,
   Users,
 } from './pages/dashboardPages';
-import { History, Portal, PortalLayout } from './pages/portalPages';
-
+import { History, Portal } from './pages/portalPages';
 import { loader as userLoader } from './components/dashboard/UsersTable';
 import { loader as leavesLoader } from './components/dashboard/LeavesTable';
 import { loader as balancesLoader } from './components/dashboard/BalancesTable';
@@ -32,7 +30,7 @@ const router = createBrowserRouter([
         path: 'dashboard',
         element: (
           <ProtectedRoute>
-            <DashboardLayout />
+            <AppLayout />
           </ProtectedRoute>
         ),
         children: [
@@ -47,7 +45,7 @@ const router = createBrowserRouter([
         path: 'portal',
         element: (
           <ProtectedRoute>
-            <PortalLayout />
+            <AppLayout />
           </ProtectedRoute>
         ),
         children: [

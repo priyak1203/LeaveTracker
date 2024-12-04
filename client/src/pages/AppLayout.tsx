@@ -1,8 +1,8 @@
-import { Outlet } from 'react-router-dom';
 import Header from '@/components/globals/Header';
 import Sidebar from '@/components/globals/Sidebar';
+import { Outlet } from 'react-router-dom';
 
-function DashboardLayout() {
+function AppLayout() {
   return (
     <>
       <div className="min-h-screen">
@@ -16,4 +16,4 @@ function DashboardLayout() {
   );
 }
 
-export default DashboardLayout;
+export default AppLayout;
