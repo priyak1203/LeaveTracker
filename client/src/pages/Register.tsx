@@ -13,7 +13,7 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import FormCardWrapper from '@/components/globals/FormCardWrapper';
 import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import customFetch from '@/utils/axios';
 
 const RegisterSchema = z.object({
@@ -147,7 +147,7 @@ function Register() {
                 </FormItem>
               )}
             />
-            <div className="flex pt-6">
+            <div className="flex pt-4">
               <Button
                 type="submit"
                 className="mx-auto"
@@ -159,6 +159,14 @@ function Register() {
             </div>
           </form>
         </Form>
+        <h3 className="capitalize text-center text-md mt-2">
+          already registered?
+          <Link to="/login">
+            <Button variant={'link'} className="capitalize ml-0 pl-2 font-bold">
+              login
+            </Button>
+          </Link>
+        </h3>
       </FormCardWrapper>
     </>
   );

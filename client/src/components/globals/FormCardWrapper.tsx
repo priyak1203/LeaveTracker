@@ -12,7 +12,7 @@ function FormCardWrapper({
 }: FormCardPropsType) {
   return (
     <div className="min-h-screen flex items-center ">
-      <Card className="w-[500px] mx-auto  p-2 ">
+      <Card className="w-[500px] mx-auto  px-2 py-0">
         <CardHeader className="text-center">
           <CardTitle className="tracking-wide font-bold text-2xl">
             <div className="flex justify-center py-1 mb-1">

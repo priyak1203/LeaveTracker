@@ -13,7 +13,7 @@ import { Input } from '@/components/ui/input';
 import FormCardWrapper from '@/components/globals/FormCardWrapper';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AppContextType, useAppContext } from '@/context/appContext';
 import customFetch from '@/utils/axios';
 
@@ -107,6 +107,14 @@ function Login() {
             </div>
           </form>
         </Form>
+        <h3 className="capitalize text-center text-md mt-4">
+          not registered yet?
+          <Link to="/register">
+            <Button variant={'link'} className="capitalize ml-0 pl-2 font-bold">
+              register
+            </Button>
+          </Link>
+        </h3>
       </FormCardWrapper>
     </>
   );
