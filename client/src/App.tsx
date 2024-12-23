@@ -1,6 +1,13 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
-import { AppLayout, HomeLayout, Landing, Login, Register } from './pages';
+import {
+  AppLayout,
+  Error,
+  HomeLayout,
+  Landing,
+  Login,
+  Register,
+} from './pages';
 import {
   Balances,
   Dashboard,
@@ -22,6 +29,7 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <HomeLayout />,
+    errorElement: <Error />,
     children: [
       { index: true, element: <Landing /> },
       { path: '/register', element: <Register /> },
