@@ -1,6 +1,7 @@
 import { Control } from 'react-hook-form';
 import {
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -13,6 +14,9 @@ type CustomFormInputProps = {
   type: string;
   control: Control<any>;
   labelText?: string;
+  description?: string;
+  placeholder?: string;
+  border?: boolean;
 };
 
 export function CustomFormInput({
@@ -20,6 +24,9 @@ export function CustomFormInput({
   type,
   control,
   labelText,
+  description,
+  placeholder,
+  border,
 }: CustomFormInputProps) {
   return (
     <FormField
@@ -29,8 +36,14 @@ export function CustomFormInput({
         <FormItem>
           <FormLabel className="capitalize">{labelText || name}</FormLabel>
           <FormControl>
-            <Input type={type} {...field} className="border-slate-300" />
+            <Input
+              type={type}
+              {...field}
+              placeholder={placeholder}
+              className={border ? 'border' : 'border-slate-300'}
+            />
           </FormControl>
+          {description && <FormDescription>{description}</FormDescription>}
           <FormMessage />
         </FormItem>
       )}

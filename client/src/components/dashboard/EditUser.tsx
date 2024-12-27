@@ -9,7 +9,6 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { useForm } from 'react-hook-form';
-import { Input } from '@/components/ui/input';
 import {
   Select,
   SelectContent,
@@ -26,6 +25,7 @@ import { RoleType, type UserType } from '@/utils/types';
 import customFetch from '@/utils/axios';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import { CustomFormInput } from '../globals/CustomFormComponents';
 
 type EditUserPropsType = {
   user: UserType;
@@ -76,19 +76,14 @@ function EditUser({ user }: EditUserPropsType) {
       <Form {...form}>
         <form className="space-y-3" onSubmit={form.handleSubmit(onSubmit)}>
           {/* PHONE  */}
-          <FormField
-            control={form.control}
+          <CustomFormInput
             name="phone"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Phone</FormLabel>
-                <FormControl>
-                  <Input placeholder="Phone" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
+            type="text"
+            control={form.control}
+            placeholder="Phone"
+            border
           />
+
           {/* DEPARTMENT  */}
           <FormField
             control={form.control}

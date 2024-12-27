@@ -16,7 +16,6 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
-import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
@@ -25,6 +24,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import customFetch from '@/utils/axios';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import { CustomFormInput } from '../globals/CustomFormComponents';
 
 const EventSchema = z.object({
   title: z.string({ required_error: 'Please provide a title' }).max(30),
@@ -67,19 +67,14 @@ function AddEvent() {
       </h2>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          <FormField
-            control={form.control}
+          {/* Title */}
+          <CustomFormInput
             name="title"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Title</FormLabel>
-                <FormControl>
-                  <Input placeholder="Title" {...field} />
-                </FormControl>
-                <FormDescription>Add a title to the event.</FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
+            type="text"
+            control={form.control}
+            placeholder="Title"
+            description="Add a title to the event."
+            border
           />
           <FormField
             control={form.control}
