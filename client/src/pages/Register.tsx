@@ -1,13 +1,5 @@
 import { Button } from '@/components/ui/button';
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
+import { Form } from '@/components/ui/form';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -15,6 +7,7 @@ import FormCardWrapper from '@/components/globals/FormCardWrapper';
 import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
 import customFetch from '@/utils/axios';
+import { CustomFormInput } from '@/components/globals/CustomFormComponents';
 
 const RegisterSchema = z.object({
   name: z.string().min(1, { message: 'Please enter your name' }),
@@ -62,91 +55,30 @@ function Register() {
             className="space-y-2 border-slate-600"
             onSubmit={form.handleSubmit(onSubmit)}
           >
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Name</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="text"
-                      {...field}
-                      className="border-slate-300"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
+            {/* Name */}
+            <CustomFormInput name="name" type="text" control={form.control} />
+
+            {/* Last Name */}
+            <CustomFormInput
               name="lastName"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Last Name</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="text"
-                      {...field}
-                      className="border-slate-300"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
+              type="text"
               control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="email"
-                      {...field}
-                      className="border-slate-300"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
+              labelText="last name"
             />
-            <FormField
-              control={form.control}
+
+            {/* Email */}
+            <CustomFormInput name="email" type="email" control={form.control} />
+
+            {/* Password */}
+            <CustomFormInput
               name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Password</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="password"
-                      {...field}
-                      className="border-slate-300"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
+              type="password"
               control={form.control}
-              name="phone"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Phone</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="text"
-                      {...field}
-                      className="border-slate-300"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
             />
+
+            {/* Phone */}
+            <CustomFormInput name="phone" type="text" control={form.control} />
+
             <div className="flex pt-4">
               <Button
                 type="submit"

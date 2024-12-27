@@ -1,21 +1,14 @@
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { Button } from '@/components/ui/button';
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
+import { Form } from '@/components/ui/form';
 import FormCardWrapper from '@/components/globals/FormCardWrapper';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Link, useNavigate } from 'react-router-dom';
 import { AppContextType, useAppContext } from '@/context/appContext';
 import customFetch from '@/utils/axios';
+import { CustomFormInput } from '@/components/globals/CustomFormComponents';
 
 const LoginSchema = z.object({
   email: z.string().email({ message: 'Please enter your email' }),
@@ -60,39 +53,13 @@ function Login() {
             className="space-y-2 border-slate-600"
             onSubmit={form.handleSubmit(onSubmit)}
           >
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="email"
-                      {...field}
-                      className="border-slate-300"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
+            {/* Email */}
+            <CustomFormInput name="email" control={form.control} type="email" />
+            {/* Password */}
+            <CustomFormInput
               name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Password</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="password"
-                      {...field}
-                      className="border-slate-300"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
+              control={form.control}
+              type="password"
             />
 
             <div className="flex pt-6">
