@@ -1,30 +1,20 @@
 import { useState } from 'react';
-import DialogWrapper from '@/components/globals/DialogWrapper';
 import { useForm } from 'react-hook-form';
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-} from '@/components/ui/form';
-import {
-  Select,
-  SelectContent,
-  SelectValue,
-  SelectTrigger,
-  SelectItem,
-} from '../ui/select';
-import { leaveStatus } from '@/utils/sampleData';
-import { Button } from '../ui/button';
+import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import toast from 'react-hot-toast';
+import DialogWrapper from '@/components/globals/DialogWrapper';
+import { Form } from '@/components/ui/form';
+import { Button } from '@/components/ui/button';
+import {
+  CustomFormSelect,
+  CustomFormTextarea,
+} from '@/components/globals/CustomFormComponents';
+import { LeaveStatus } from '@/utils/sampleData';
 import { UserLeavesType } from '@/utils/types';
 import customFetch from '@/utils/axios';
 import { AppContextType, useAppContext } from '@/context/appContext';
-import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
-import { CustomFormTextarea } from '../globals/CustomFormComponents';
 
 type EditLeavePropsType = {
   leave: UserLeavesType;
@@ -32,7 +22,7 @@ type EditLeavePropsType = {
 
 const EditLeaveScheme = z.object({
   notes: z.string().max(200).optional(),
-  leaveStatus: z.enum(leaveStatus),
+  leaveStatus: z.nativeEnum(LeaveStatus),
 });
 
 function EditLeave({ leave }: EditLeavePropsType) {
@@ -98,35 +88,14 @@ function EditLeave({ leave }: EditLeavePropsType) {
     >
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          {/* LEAVE TYPE */}
-          <FormField
-            control={form.control}
+          {/* LEAVE STATUS */}
+          <CustomFormSelect
             name="leaveStatus"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Leave Status</FormLabel>
-                <Select onValueChange={field.onChange} value={field.value}>
-                  <FormControl>
-                    <SelectTrigger className="capitalize">
-                      <SelectValue placeholder="Select a status" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {leaveStatus.map((status) => (
-                      <SelectItem
-                        key={status}
-                        value={status}
-                        className="capitalize"
-                      >
-                        {status}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </FormItem>
-            )}
+            control={form.control}
+            items={Object.values(LeaveStatus)}
+            placeholder="Select a status"
+            labelText="leave status"
           />
-
           {/* NOTES */}
           <CustomFormTextarea
             name="notes"
@@ -134,7 +103,6 @@ function EditLeave({ leave }: EditLeavePropsType) {
             placeholder="Notes..."
             description="Add extra notes to support your request"
           />
-
           <Button type="submit" className="my-4">
             Submit
           </Button>

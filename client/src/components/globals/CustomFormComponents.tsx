@@ -9,6 +9,13 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '../ui/textarea';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '../ui/select';
 
 type CustomFormInputProps = {
   name: string;
@@ -78,6 +85,49 @@ export function CustomFormTextarea({
             <Textarea placeholder={placeholder} {...field} />
           </FormControl>
           <FormDescription>{description}</FormDescription>
+          <FormMessage />
+        </FormItem>
+      )}
+    />
+  );
+}
+
+type CustomFormSelectProps = {
+  name: string;
+  control: Control<any>;
+  items: string[];
+  placeholder: string;
+  labelText?: string;
+};
+
+export function CustomFormSelect({
+  name,
+  control,
+  items,
+  placeholder,
+  labelText,
+}: CustomFormSelectProps) {
+  return (
+    <FormField
+      control={control}
+      name={name}
+      render={({ field }) => (
+        <FormItem>
+          <FormLabel className="capitalize">{labelText || name}</FormLabel>
+          <Select onValueChange={field.onChange} value={field.value}>
+            <FormControl>
+              <SelectTrigger className="capitalize">
+                <SelectValue placeholder={placeholder} />
+              </SelectTrigger>
+            </FormControl>
+            <SelectContent>
+              {items.map((item) => (
+                <SelectItem key={item} value={item} className="capitalize">
+                  {item}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
           <FormMessage />
         </FormItem>
       )}

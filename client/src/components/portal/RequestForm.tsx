@@ -15,24 +15,20 @@ import {
 } from '@/components/ui/popover';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { leaveTypes } from '@/utils/sampleData';
+import { LeaveTypes } from '@/utils/sampleData';
 import { IoCalendarOutline } from 'react-icons/io5';
 import { format } from 'date-fns';
 import { Calendar } from '@/components/ui/calendar';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
 import customFetch from '@/utils/axios';
 import { AppContextType, useAppContext } from '@/context/appContext';
 import toast from 'react-hot-toast';
-import { CustomFormTextarea } from '../globals/CustomFormComponents';
+import {
+  CustomFormSelect,
+  CustomFormTextarea,
+} from '../globals/CustomFormComponents';
 
 const LeaveSchema = z.object({
   leaveType: z.string({ required_error: 'Please select a leave type' }),
@@ -86,33 +82,12 @@ function RequestForm() {
       <Form {...form}>
         <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
           {/* LEAVE TYPE */}
-          <FormField
-            control={form.control}
+          <CustomFormSelect
             name="leaveType"
-            render={({ field }) => (
-              <FormItem className="flex flex-col">
-                <FormLabel>Leave Type</FormLabel>
-                <Select onValueChange={field.onChange} value={field.value}>
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select a leave type" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {leaveTypes.map((leave) => (
-                      <SelectItem
-                        key={leave.label}
-                        value={leave.value}
-                        className="flex"
-                      >
-                        {leave.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
+            control={form.control}
+            items={Object.values(LeaveTypes)}
+            placeholder="Select a leave type"
+            labelText="leave type"
           />
 
           {/* START DATE  */}

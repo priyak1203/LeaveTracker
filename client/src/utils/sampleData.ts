@@ -1,19 +1,19 @@
-export const leaveTypes = [
-  { label: 'Annual', value: 'annual' },
-  { label: 'Health', value: 'health' },
-  { label: 'Study', value: 'study' },
-  { label: 'Family', value: 'family' },
-  { label: 'Maternity', value: 'maternity' },
-  { label: 'Paternity', value: 'paternity' },
-  { label: 'Unpaid', value: 'unpaid' },
-] as const;
+export enum LeaveTypes {
+  Annual = 'annual',
+  Health = 'health',
+  Study = 'study',
+  Family = 'family',
+  Maternity = 'maternity',
+  Paternity = 'paternity',
+  Unpaid = 'unpaid',
+}
 
-export const leaveStatus = [
-  'pending',
-  'approved',
-  'inmoderation',
-  'rejected',
-] as const;
+export enum LeaveStatus {
+  Pending = 'pending',
+  Approved = 'approved',
+  Inmoderation = 'inmoderation',
+  Rejected = 'rejected',
+}
 
 export const departments = [
   {
