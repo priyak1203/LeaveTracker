@@ -4,7 +4,6 @@ import { useForm } from 'react-hook-form';
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -17,7 +16,6 @@ import {
   SelectItem,
 } from '../ui/select';
 import { leaveStatus } from '@/utils/sampleData';
-import { Textarea } from '../ui/textarea';
 import { Button } from '../ui/button';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -26,6 +24,7 @@ import customFetch from '@/utils/axios';
 import { AppContextType, useAppContext } from '@/context/appContext';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import { CustomFormTextarea } from '../globals/CustomFormComponents';
 
 type EditLeavePropsType = {
   leave: UserLeavesType;
@@ -129,21 +128,13 @@ function EditLeave({ leave }: EditLeavePropsType) {
           />
 
           {/* NOTES */}
-          <FormField
-            control={form.control}
+          <CustomFormTextarea
             name="notes"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Notes</FormLabel>
-                <FormControl>
-                  <Textarea {...field} placeholder="Notes..." />
-                </FormControl>
-                <FormDescription>
-                  Add extra notes to support your request
-                </FormDescription>
-              </FormItem>
-            )}
+            control={form.control}
+            placeholder="Notes..."
+            description="Add extra notes to support your request"
           />
+
           <Button type="submit" className="my-4">
             Submit
           </Button>

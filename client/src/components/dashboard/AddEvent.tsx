@@ -5,7 +5,6 @@ import { format } from 'date-fns';
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -16,7 +15,6 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
-import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import { z } from 'zod';
@@ -24,7 +22,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import customFetch from '@/utils/axios';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
-import { CustomFormInput } from '../globals/CustomFormComponents';
+import {
+  CustomFormInput,
+  CustomFormTextarea,
+} from '../globals/CustomFormComponents';
 
 const EventSchema = z.object({
   title: z.string({ required_error: 'Please provide a title' }).max(30),
@@ -76,22 +77,14 @@ function AddEvent() {
             description="Add a title to the event."
             border
           />
-          <FormField
-            control={form.control}
+          {/* Description */}
+          <CustomFormTextarea
             name="description"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Description</FormLabel>
-                <FormControl>
-                  <Textarea placeholder="Description" {...field} />
-                </FormControl>
-                <FormDescription>
-                  Describe briefly the Event details.
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
+            placeholder="Description..."
+            control={form.control}
+            description=" Describe briefly the Event details."
           />
+
           <FormField
             control={form.control}
             name="startDate"

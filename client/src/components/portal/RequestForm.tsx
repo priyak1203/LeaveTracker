@@ -3,7 +3,6 @@ import DialogWrapper from '@/components/globals/DialogWrapper';
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -20,7 +19,6 @@ import { leaveTypes } from '@/utils/sampleData';
 import { IoCalendarOutline } from 'react-icons/io5';
 import { format } from 'date-fns';
 import { Calendar } from '@/components/ui/calendar';
-import { Textarea } from '@/components/ui/textarea';
 import {
   Select,
   SelectContent,
@@ -34,6 +32,7 @@ import { useState } from 'react';
 import customFetch from '@/utils/axios';
 import { AppContextType, useAppContext } from '@/context/appContext';
 import toast from 'react-hot-toast';
+import { CustomFormTextarea } from '../globals/CustomFormComponents';
 
 const LeaveSchema = z.object({
   leaveType: z.string({ required_error: 'Please select a leave type' }),
@@ -209,21 +208,12 @@ function RequestForm() {
           />
 
           {/* NOTES */}
-          <FormField
-            control={form.control}
+          <CustomFormTextarea
             name="userNotes"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Notes</FormLabel>
-                <FormControl>
-                  <Textarea placeholder="Notes" {...field} />
-                </FormControl>
-                <FormDescription>
-                  Add extra notes to support your request
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
+            labelText="notes"
+            control={form.control}
+            placeholder="Notes..."
+            description="Add extra notes to support your request"
           />
 
           <Button type="submit">Submit</Button>

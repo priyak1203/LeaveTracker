@@ -8,6 +8,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { Textarea } from '../ui/textarea';
 
 type CustomFormInputProps = {
   name: string;
@@ -44,6 +45,39 @@ export function CustomFormInput({
             />
           </FormControl>
           {description && <FormDescription>{description}</FormDescription>}
+          <FormMessage />
+        </FormItem>
+      )}
+    />
+  );
+}
+
+type CustomFormTextareaProps = {
+  name: string;
+  control: Control<any>;
+  description: string;
+  placeholder: string;
+  labelText?: string;
+};
+
+export function CustomFormTextarea({
+  name,
+  control,
+  labelText,
+  description,
+  placeholder,
+}: CustomFormTextareaProps) {
+  return (
+    <FormField
+      control={control}
+      name={name}
+      render={({ field }) => (
+        <FormItem>
+          <FormLabel className="capitalize">{labelText || name}</FormLabel>
+          <FormControl>
+            <Textarea placeholder={placeholder} {...field} />
+          </FormControl>
+          <FormDescription>{description}</FormDescription>
           <FormMessage />
         </FormItem>
       )}
