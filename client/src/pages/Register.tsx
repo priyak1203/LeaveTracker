@@ -57,7 +57,6 @@ function Register() {
           >
             {/* Name */}
             <CustomFormInput name="name" type="text" control={form.control} />
-
             {/* Last Name */}
             <CustomFormInput
               name="lastName"
@@ -65,20 +64,16 @@ function Register() {
               control={form.control}
               labelText="last name"
             />
-
             {/* Email */}
             <CustomFormInput name="email" type="email" control={form.control} />
-
             {/* Password */}
             <CustomFormInput
               name="password"
               type="password"
               control={form.control}
             />
-
             {/* Phone */}
             <CustomFormInput name="phone" type="text" control={form.control} />
-
             <div className="flex pt-4">
               <Button
                 type="submit"
