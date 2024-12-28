@@ -28,12 +28,19 @@ const EditLeaveScheme = z.object({
 function EditLeave({ leave }: EditLeavePropsType) {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
+
+  const values = {
+    notes: leave.moderatorNotes as string,
+    leaveStatus: leave.leaveStatus as LeaveStatus,
+  };
+
   const form = useForm<z.infer<typeof EditLeaveScheme>>({
     resolver: zodResolver(EditLeaveScheme),
     defaultValues: {
       notes: leave.moderatorNotes,
       leaveStatus: leave.leaveStatus,
     },
+    values,
   });
 
   const { user: loggedInUser } = useAppContext() as AppContextType;

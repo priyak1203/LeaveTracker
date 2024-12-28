@@ -1,20 +1,20 @@
-import { IoPencil } from 'react-icons/io5';
-import DialogWrapper from '@/components/globals/DialogWrapper';
-import { Form } from '@/components/ui/form';
-import { useForm } from 'react-hook-form';
-import { Button } from '@/components/ui/button';
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
-import { departments, titles } from '@/utils/sampleData';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { IoPencil } from 'react-icons/io5';
+import toast from 'react-hot-toast';
+import { departments, titles } from '@/utils/sampleData';
 import { UserRole, type UserType } from '@/utils/types';
 import customFetch from '@/utils/axios';
-import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
+import DialogWrapper from '@/components/globals/DialogWrapper';
+import { Form } from '@/components/ui/form';
+import { Button } from '@/components/ui/button';
 import {
   CustomFormInput,
   CustomFormSelect,
-} from '../globals/CustomFormComponents';
+} from '@/components/globals/CustomFormComponents';
 
 type EditUserPropsType = {
   user: UserType;
@@ -34,6 +34,13 @@ function EditUser({ user }: EditUserPropsType) {
   const jobTitles = titles.map((title) => title.label);
   const depts = departments.map((dept) => dept.label);
 
+  const values = {
+    phone: user.phone as string,
+    department: user.department as string,
+    jobTitle: user.jobTitle as string,
+    role: user.role,
+  };
+
   const form = useForm<z.infer<typeof EditUserSchema>>({
     resolver: zodResolver(EditUserSchema),
     defaultValues: {
@@ -42,6 +49,7 @@ function EditUser({ user }: EditUserPropsType) {
       jobTitle: user.jobTitle,
       role: user.role,
     },
+    values,
   });
 
   async function onSubmit(values: z.infer<typeof EditUserSchema>) {

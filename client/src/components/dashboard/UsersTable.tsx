@@ -1,4 +1,3 @@
-import { useLoaderData } from 'react-router-dom';
 import {
   Table,
   TableBody,
@@ -12,17 +11,12 @@ import { Badge } from '@/components/ui/badge';
 import { type UserType } from '@/utils/types';
 import AddCredits from './AddCredits';
 import EditUser from './EditUser';
-import customFetch from '@/utils/axios';
 
-export const loader = async () => {
-  const { data } = await customFetch.get(`/users/all-users`);
-  const usersData: UserType[] = data.users;
-  return usersData;
+type UsersDataTableProps = {
+  usersData: UserType[];
 };
 
-function UsersTable() {
-  const usersData = useLoaderData() as UserType[];
-
+function UsersTable({ usersData }: UsersDataTableProps) {
   const tableHeadData = [
     'Avatar',
     'Name',
