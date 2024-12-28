@@ -67,7 +67,7 @@ export type UserBalancesType = {
 
 export type UserLeavesType = {
   _id: string;
-  leaveType: string;
+  leaveType: LeaveTypes;
   year: string;
   startDate: string;
   endDate: string;
@@ -75,7 +75,7 @@ export type UserLeavesType = {
   userName?: string;
   userEmail?: string;
   userNotes?: string;
-  leaveStatus?: string;
+  leaveStatus?: LeaveStatus;
   user?: string;
   moderator?: string;
   moderatorName?: string;

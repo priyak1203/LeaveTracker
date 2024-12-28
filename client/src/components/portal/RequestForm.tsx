@@ -31,7 +31,7 @@ import {
 } from '../globals/CustomFormComponents';
 
 const LeaveSchema = z.object({
-  leaveType: z.string({ required_error: 'Please select a leave type' }),
+  leaveType: z.nativeEnum(LeaveTypes),
   startDate: z.date({ required_error: 'A start date is required' }),
   endDate: z.date({ required_error: 'An end date is required' }),
   userNotes: z.string().max(500).optional(),
@@ -46,6 +46,7 @@ function RequestForm() {
     resolver: zodResolver(LeaveSchema),
     defaultValues: {
       userNotes: '',
+      leaveType: LeaveTypes.Annual,
     },
   });
 

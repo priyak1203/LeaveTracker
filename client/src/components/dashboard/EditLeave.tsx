@@ -31,7 +31,8 @@ function EditLeave({ leave }: EditLeavePropsType) {
   const form = useForm<z.infer<typeof EditLeaveScheme>>({
     resolver: zodResolver(EditLeaveScheme),
     defaultValues: {
-      notes: '',
+      notes: leave.moderatorNotes,
+      leaveStatus: leave.leaveStatus,
     },
   });
 
