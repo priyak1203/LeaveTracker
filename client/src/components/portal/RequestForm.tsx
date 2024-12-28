@@ -1,34 +1,19 @@
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import DialogWrapper from '@/components/globals/DialogWrapper';
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover';
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
-import { LeaveTypes } from '@/utils/types';
-import { IoCalendarOutline } from 'react-icons/io5';
-import { format } from 'date-fns';
-import { Calendar } from '@/components/ui/calendar';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useState } from 'react';
-import customFetch from '@/utils/axios';
-import { AppContextType, useAppContext } from '@/context/appContext';
 import toast from 'react-hot-toast';
+import { AppContextType, useAppContext } from '@/context/appContext';
+import customFetch from '@/utils/axios';
+import { LeaveTypes } from '@/utils/types';
+import DialogWrapper from '@/components/globals/DialogWrapper';
+import { Form } from '@/components/ui/form';
+import { Button } from '@/components/ui/button';
 import {
+  CustomFormDatePicker,
   CustomFormSelect,
   CustomFormTextarea,
-} from '../globals/CustomFormComponents';
+} from '@/components/globals/CustomFormComponents';
 
 const LeaveSchema = z.object({
   leaveType: z.nativeEnum(LeaveTypes),
@@ -90,99 +75,18 @@ function RequestForm() {
             placeholder="Select a leave type"
             labelText="leave type"
           />
-
           {/* START DATE  */}
-          <FormField
-            control={form.control}
+          <CustomFormDatePicker
             name="startDate"
-            render={({ field }) => (
-              <FormItem className="flex flex-col">
-                <FormLabel>Start Date</FormLabel>
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <FormControl>
-                      <Button
-                        variant="outline"
-                        className={cn(
-                          'inline-flex justify-between focus:border-purple-700 hover:border-purple-700 ',
-                          !field.value && 'text-muted-foreground'
-                        )}
-                      >
-                        {field.value ? (
-                          format(field.value, 'PPP')
-                        ) : (
-                          <span>Pick a date</span>
-                        )}
-                        <IoCalendarOutline className="h-4 w-4 opacity-90" />
-                      </Button>
-                    </FormControl>
-                  </PopoverTrigger>
-                  <PopoverContent align="start" className="w-auto p-0">
-                    <Calendar
-                      mode="single"
-                      onSelect={field.onChange}
-                      selected={field.value}
-                      disabled={(date: Date) => {
-                        const today = new Date();
-                        const currentYear = today.getFullYear();
-                        // this disables the older dates than today and next year dates
-                        return date < today || date.getFullYear() > currentYear;
-                      }}
-                      initialFocus
-                    />
-                  </PopoverContent>
-                </Popover>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          {/* END DATE  */}
-          <FormField
             control={form.control}
-            name="endDate"
-            render={({ field }) => (
-              <FormItem className="flex flex-col">
-                <FormLabel>End Date</FormLabel>
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <FormControl>
-                      <Button
-                        variant="outline"
-                        className={cn(
-                          'inline-flex justify-between focus:border-purple-700 hover:border-purple-700',
-                          !field.value && 'text-muted-foreground'
-                        )}
-                      >
-                        {field.value ? (
-                          format(field.value, 'PPP')
-                        ) : (
-                          <span>Pick a date</span>
-                        )}
-                        <IoCalendarOutline className="h-4 w-4 opacity-90" />
-                      </Button>
-                    </FormControl>
-                  </PopoverTrigger>
-                  <PopoverContent align="start" className="p-0 w-auto">
-                    <Calendar
-                      mode="single"
-                      onSelect={field.onChange}
-                      selected={field.value}
-                      disabled={(date: Date) => {
-                        const today = new Date();
-                        const currentYear = today.getFullYear();
-                        // this disables the older dates than today and next year dates
-                        return date < today || date.getFullYear() > currentYear;
-                      }}
-                      initialFocus
-                    />
-                  </PopoverContent>
-                </Popover>
-                <FormMessage />
-              </FormItem>
-            )}
+            labetText="start date"
           />
-
+          {/* END DATE  */}
+          <CustomFormDatePicker
+            name="endDate"
+            control={form.control}
+            labetText="end date"
+          />
           {/* NOTES */}
           <CustomFormTextarea
             name="userNotes"
@@ -191,7 +95,6 @@ function RequestForm() {
             placeholder="Notes..."
             description="Add extra notes to support your request"
           />
-
           <Button type="submit">Submit</Button>
         </form>
       </Form>

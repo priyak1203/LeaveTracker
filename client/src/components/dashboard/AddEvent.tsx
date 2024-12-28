@@ -1,31 +1,16 @@
-import { IoCalendarOutline } from 'react-icons/io5';
 import { useForm } from 'react-hook-form';
-import { cn } from '@/lib/utils';
-import { format } from 'date-fns';
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover';
-import { Button } from '@/components/ui/button';
-import { Calendar } from '@/components/ui/calendar';
+import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import customFetch from '@/utils/axios';
-import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
+import { Form } from '@/components/ui/form';
+import { Button } from '@/components/ui/button';
 import {
+  CustomFormDatePicker,
   CustomFormInput,
   CustomFormTextarea,
-} from '../globals/CustomFormComponents';
+} from '@/components/globals/CustomFormComponents';
 
 const EventSchema = z.object({
   title: z.string({ required_error: 'Please provide a title' }).max(30),
@@ -68,7 +53,7 @@ function AddEvent() {
       </h2>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          {/* Title */}
+          {/* TITLE */}
           <CustomFormInput
             name="title"
             type="text"
@@ -77,52 +62,19 @@ function AddEvent() {
             description="Add a title to the event."
             border
           />
-          {/* Description */}
+          {/* DESCRIPTION */}
           <CustomFormTextarea
             name="description"
             placeholder="Description..."
             control={form.control}
             description=" Describe briefly the Event details."
           />
-
-          <FormField
-            control={form.control}
+          {/* START DATE */}
+          <CustomFormDatePicker
             name="startDate"
-            render={({ field }) => (
-              <FormItem className="flex flex-col">
-                <FormLabel>Start Date</FormLabel>
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <FormControl>
-                      <Button
-                        variant={'outline'}
-                        className={cn(
-                          'inline-flex justify-between',
-                          !field.value && 'text-muted-foreground'
-                        )}
-                      >
-                        {field.value ? (
-                          format(field.value, 'PPP')
-                        ) : (
-                          <span>Pick a date</span>
-                        )}
-                        <IoCalendarOutline className="w-4 h-4 opacity-90" />
-                      </Button>
-                    </FormControl>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0" align="start">
-                    <Calendar
-                      mode="single"
-                      onSelect={field.onChange}
-                      disabled={(date) => date < new Date()}
-                      initialFocus
-                    />
-                  </PopoverContent>
-                </Popover>
-
-                <FormMessage />
-              </FormItem>
-            )}
+            control={form.control}
+            labetText="start date"
+            event
           />
           <Button type="submit">Submit</Button>
         </form>
