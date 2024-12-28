@@ -6,22 +6,18 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import customFetch from '@/utils/axios';
 import { type UserLeavesType } from '@/utils/types';
 import dayjs from 'dayjs';
-import { useLoaderData } from 'react-router-dom';
 import { Badge } from '../ui/badge';
 import { formatDistance, parseISO, subDays } from 'date-fns';
 import EditLeave from './EditLeave';
 import { getBadgeClass } from '@/utils/getStyles';
 
-export const loader = async () => {
-  const { data } = await customFetch.get('/leave/all-leaves');
-  const allLeaves: UserLeavesType[] = data.allLeaves;
-  return allLeaves;
+type LeavesTableProps = {
+  allUserLeaves: UserLeavesType[];
 };
 
-function LeavesTable() {
+function LeavesTable({ allUserLeaves }: LeavesTableProps) {
   const tableHeadData = [
     'Edit',
     'User',
@@ -36,7 +32,6 @@ function LeavesTable() {
     'Updated Notes',
     'Updated By',
   ];
-  const allUserLeaves = useLoaderData() as UserLeavesType[];
 
   return (
     <Table>

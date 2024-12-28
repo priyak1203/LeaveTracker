@@ -8,15 +8,11 @@ import {
 } from '@/components/ui/table';
 import TableWrapper from '@/components/globals/TableWrapper';
 import { Badge } from '@/components/ui/badge';
-import customFetch from '@/utils/axios';
-import { useLoaderData } from 'react-router-dom';
 import { UserBalancesType } from '@/utils/types';
 import EditBalances from './EditBalances';
 
-export const loader = async () => {
-  const { data } = await customFetch.get(`/leave/all-balances`);
-  const allBalances: UserBalancesType[] = data.balances;
-  return allBalances;
+type BalancesTableProps = {
+  allBalances: UserBalancesType[];
 };
 
 type BalanceRowTypes = {
@@ -38,9 +34,7 @@ const BalanceRowHead = ({ title, values }: BalanceRowTypes) => {
   );
 };
 
-function BalancesTable() {
-  const allBalances = useLoaderData() as UserBalancesType[];
-
+function BalancesTable({ allBalances }: BalancesTableProps) {
   const balanceCategories = [
     { title: 'ANNUAL', values: ['Credit', 'Used', 'Available'] },
     { title: 'FAMILY', values: ['Credit', 'Used', 'Available'] },

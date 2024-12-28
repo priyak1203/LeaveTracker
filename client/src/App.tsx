@@ -17,10 +17,10 @@ import {
 } from './pages/dashboardPages';
 import { History, Portal } from './pages/portalPages';
 
-import { loader as leavesLoader } from './components/dashboard/LeavesTable';
-import { loader as balancesLoader } from './components/dashboard/BalancesTable';
-import { loader as userLoader } from './pages/dashboardPages/Users';
+import { loader as balancesLoader } from './pages/dashboardPages/Balances';
+import { loader as leavesLoader } from './pages/dashboardPages/Leaves';
 import { loader as settingsLoader } from './pages/dashboardPages/Settings';
+import { loader as userLoader } from './pages/dashboardPages/Users';
 import { loader as portalLoader } from './pages/portalPages/Portal';
 import { loader as historyLoader } from './pages/portalPages/History';
 

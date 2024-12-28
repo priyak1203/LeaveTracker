@@ -12,11 +12,11 @@ import { type UserType } from '@/utils/types';
 import AddCredits from './AddCredits';
 import EditUser from './EditUser';
 
-type UsersDataTableProps = {
+type UsersTableProps = {
   usersData: UserType[];
 };
 
-function UsersTable({ usersData }: UsersDataTableProps) {
+function UsersTable({ usersData }: UsersTableProps) {
   const tableHeadData = [
     'Avatar',
     'Name',
