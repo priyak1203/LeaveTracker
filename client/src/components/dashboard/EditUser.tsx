@@ -1,31 +1,20 @@
 import { IoPencil } from 'react-icons/io5';
 import DialogWrapper from '@/components/globals/DialogWrapper';
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
+import { Form } from '@/components/ui/form';
 import { useForm } from 'react-hook-form';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 import { z } from 'zod';
-import { departments, titles, userRoles } from '@/utils/sampleData';
+import { departments, titles } from '@/utils/sampleData';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { RoleType, type UserType } from '@/utils/types';
+import { UserRole, type UserType } from '@/utils/types';
 import customFetch from '@/utils/axios';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
-import { CustomFormInput } from '../globals/CustomFormComponents';
+import {
+  CustomFormInput,
+  CustomFormSelect,
+} from '../globals/CustomFormComponents';
 
 type EditUserPropsType = {
   user: UserType;
@@ -35,12 +24,15 @@ const EditUserSchema = z.object({
   phone: z.string().max(10).optional(),
   department: z.string({ required_error: 'Provide department' }),
   jobTitle: z.string({ required_error: 'Provide job title' }),
-  role: z.enum(userRoles),
+  role: z.nativeEnum(UserRole),
 });
 
 function EditUser({ user }: EditUserPropsType) {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
+
+  const jobTitles = titles.map((title) => title.label);
+  const depts = departments.map((dept) => dept.label);
 
   const form = useForm<z.infer<typeof EditUserSchema>>({
     resolver: zodResolver(EditUserSchema),
@@ -48,7 +40,7 @@ function EditUser({ user }: EditUserPropsType) {
       phone: user.phone,
       department: user.department,
       jobTitle: user.jobTitle,
-      role: user.role as RoleType,
+      role: user.role,
     },
   });
 
@@ -63,6 +55,7 @@ function EditUser({ user }: EditUserPropsType) {
       const errMsg = error?.response?.data?.msg || `Something went wrong`;
       toast.error(errMsg);
     }
+    form.reset();
   }
 
   return (
@@ -83,95 +76,27 @@ function EditUser({ user }: EditUserPropsType) {
             placeholder="Phone"
             border
           />
-
           {/* DEPARTMENT  */}
-          <FormField
-            control={form.control}
+          <CustomFormSelect
             name="department"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Department</FormLabel>
-                <Select onValueChange={field.onChange} value={field.value}>
-                  <FormControl className="capitalize">
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select a department" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {departments.map((department) => (
-                      <SelectItem
-                        key={department.id}
-                        value={department.label}
-                        className="capitalize"
-                      >
-                        {department.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
+            control={form.control}
+            items={depts}
+            placeholder="Select a department"
           />
-
           {/* TITLE */}
-          <FormField
-            control={form.control}
+          <CustomFormSelect
             name="jobTitle"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Job Title</FormLabel>
-                <Select onValueChange={field.onChange} value={field.value}>
-                  <FormControl className="uppercase">
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select a Job Title" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {titles.map((title) => (
-                      <SelectItem
-                        key={title.id}
-                        value={title.label}
-                        className="uppercase"
-                      >
-                        {title.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          {/* ROLE */}
-          <FormField
             control={form.control}
+            items={jobTitles}
+            labelText="job title"
+            placeholder="Select a Job Title"
+          />
+          {/* ROLE */}
+          <CustomFormSelect
             name="role"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Role</FormLabel>
-                <Select onValueChange={field.onChange} value={field.value}>
-                  <FormControl className="uppercase">
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select a role" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {userRoles.map((role, index) => (
-                      <SelectItem
-                        key={index}
-                        value={role}
-                        className="uppercase"
-                      >
-                        {role}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
+            control={form.control}
+            items={Object.values(UserRole)}
+            placeholder="Select a role"
           />
           <Button type="submit">Submit</Button>
         </form>

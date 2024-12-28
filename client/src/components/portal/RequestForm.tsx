@@ -15,7 +15,7 @@ import {
 } from '@/components/ui/popover';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { LeaveTypes } from '@/utils/sampleData';
+import { LeaveTypes } from '@/utils/types';
 import { IoCalendarOutline } from 'react-icons/io5';
 import { format } from 'date-fns';
 import { Calendar } from '@/components/ui/calendar';

@@ -1,3 +1,31 @@
+export enum LeaveTypes {
+  Annual = 'annual',
+  Health = 'health',
+  Study = 'study',
+  Family = 'family',
+  Maternity = 'maternity',
+  Paternity = 'paternity',
+  Unpaid = 'unpaid',
+}
+
+export enum LeaveStatus {
+  Pending = 'pending',
+  Approved = 'approved',
+  Inmoderation = 'inmoderation',
+  Rejected = 'rejected',
+}
+
+export enum UserRole {
+  ADMIN = 'admin',
+  MODERATOR = 'moderator',
+  USER = 'user',
+}
+
+export enum RenderStyle {
+  ICON = 'ICON',
+  LINKS = 'LINKS',
+}
+
 export type UserType = {
   _id: string;
   name: string;
@@ -6,11 +34,9 @@ export type UserType = {
   phone?: string;
   department?: string;
   jobTitle?: string;
-  role: string;
+  role: UserRole;
   image?: string;
 };
-
-export type RoleType = 'admin' | 'moderator' | 'user';
 
 export type UserBalancesType = {
   _id: string;
@@ -65,14 +91,3 @@ export type UserEventType = {
   startDate: string;
   endDate?: string;
 };
-
-export enum UserRole {
-  ADMIN = 'admin',
-  MODERATOR = 'moderator',
-  USER = 'user',
-}
-
-export enum RenderStyle {
-  ICON = 'ICON',
-  LINKS = 'LINKS',
-}

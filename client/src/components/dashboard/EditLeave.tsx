@@ -11,7 +11,7 @@ import {
   CustomFormSelect,
   CustomFormTextarea,
 } from '@/components/globals/CustomFormComponents';
-import { LeaveStatus } from '@/utils/sampleData';
+import { LeaveStatus } from '@/utils/types';
 import { UserLeavesType } from '@/utils/types';
 import customFetch from '@/utils/axios';
 import { AppContextType, useAppContext } from '@/context/appContext';

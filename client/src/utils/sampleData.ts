@@ -1,20 +1,3 @@
-export enum LeaveTypes {
-  Annual = 'annual',
-  Health = 'health',
-  Study = 'study',
-  Family = 'family',
-  Maternity = 'maternity',
-  Paternity = 'paternity',
-  Unpaid = 'unpaid',
-}
-
-export enum LeaveStatus {
-  Pending = 'pending',
-  Approved = 'approved',
-  Inmoderation = 'inmoderation',
-  Rejected = 'rejected',
-}
-
 export const departments = [
   {
     label: 'finance',
@@ -50,7 +33,7 @@ export const departments = [
 
 export const titles = [
   {
-    label: 'ceo',
+    label: 'CEO',
     id: '1',
     desc: 'Handles the company',
     subordinates: [],
@@ -86,5 +69,3 @@ export const titles = [
     subordinates: [],
   },
 ] as const;
-
-export const userRoles = ['admin', 'user', 'moderator'] as const;
