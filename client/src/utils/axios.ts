@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getUserFromLocalStorage } from './localStorage';
 
 const customFetch = axios.create({
-  baseURL: `http://localhost:5000/api/v1`,
+  baseURL: `https://leavetracker-wo1m.onrender.com/api/v1`,
 });
 
 customFetch.interceptors.request.use(

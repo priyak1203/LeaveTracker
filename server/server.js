@@ -3,6 +3,8 @@ import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import 'express-async-errors';
+import helmet from 'helmet';
+import mongoSanitize from 'express-mongo-sanitize';
 
 dotenv.config();
 
@@ -20,6 +22,8 @@ import errorHandler from './middlewares/errorHandler.js';
 // middlewares
 app.use(cors());
 app.use(express.json());
+app.use(helmet());
+app.use(mongoSanitize());
 
 // routes
 app.get('/', (req, res) => {
